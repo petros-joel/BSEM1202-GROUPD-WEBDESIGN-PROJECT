@@ -1,0 +1,1900 @@
+><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title> BSEM1202 Group D Health Services | Sierra Leone's Premier Healthcare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0c10;
+            color: #eef2ff;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 12, 16, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(45, 212, 191, 0.3);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #2dd4bf, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo p {
+            font-size: 0.7rem;
+            color: #2dd4bf;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0.8rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu a {
+            color: #eef2ff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: #2dd4bf;
+        }
+
+        .search-wrapper {
+            display: flex;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50px;
+            padding: 0.25rem 0.75rem;
+        }
+
+        .search-wrapper input {
+            background: transparent;
+            border: none;
+            padding: 0.5rem;
+            color: white;
+            outline: none;
+        }
+
+        .search-wrapper button {
+            background: transparent;
+            border: none;
+            color: #2dd4bf;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #2dd4bf;
+        }
+
+        main {
+    margin-top: 80px;
+    min-height: calc(100vh - 80px);
+    padding-top: 20px;  /
+}
+
+        .hero {
+            background: radial-gradient(circle at 30% 40%, #1e293b, #0a0c10);
+            border-radius: 2rem;
+            padding: 4rem;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(45,212,191,0.2);
+            color: #2dd4bf;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 span {
+            color: #2dd4bf;
+        }
+
+        .hero-content p {
+            color: #9ca3af;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: #2dd4bf;
+            color: #0a0c10;
+        }
+
+        .btn-primary:hover {
+            background: #14b8a6;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #2dd4bf;
+            color: #2dd4bf;
+        }
+
+        .btn-outline:hover {
+            background: #2dd4bf;
+            color: #0a0c10;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2dd4bf;
+        }
+
+        .hero-image {
+            flex: 1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #2dd4bf;
+            padding-left: 1rem;
+        }
+
+        .section-title span {
+            color: #2dd4bf;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .service-card, .doctor-card, .leader-card {
+            background: #11141c;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid #1f2937;
+            transition: all 0.3s;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .service-card:hover, .doctor-card:hover, .leader-card:hover {
+            transform: translateY(-5px);
+            border-color: #2dd4bf;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: #2dd4bf;
+            margin-bottom: 1rem;
+        }
+
+        .doctor-image, .leader-image {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            background: #1a1f2a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .doctor-image img, .leader-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: #1a1f2a;
+        }
+
+        .image-placeholder i {
+            font-size: 5rem;
+            color: #2dd4bf;
+        }
+
+        .doctor-info {
+            padding: 1.5rem;
+        }
+
+        .doctor-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+            color: #2dd4bf;
+        }
+
+        .doctor-specialty {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .doctor-expertise {
+            color: #fbbf24;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        .form-container {
+            background: #11141c;
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid #1f2937;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: #0a0c10;
+            border: 1px solid #1f2937;
+            border-radius: 0.5rem;
+            color: white;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid #10b981;
+            color: #10b981;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .alert-info {
+            background: rgba(59,130,246,0.2);
+            border: 1px solid #3b82f6;
+            color: #3b82f6;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            border-bottom: 1px solid #1f2937;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .tab-btn.active {
+            color: #2dd4bf;
+            border-bottom: 2px solid #2dd4bf;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: #11141c;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid #1f2937;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2dd4bf;
+        }
+
+        .location-card {
+            background: #0a0c10;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #1f2937;
+        }
+
+        .location-name {
+            color: #2dd4bf;
+            margin-bottom: 0.5rem;
+        }
+
+        .location-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #9ca3af;
+            margin-bottom: 0.25rem;
+        }
+
+        .appointment-item {
+            background: #0a0c10;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-left: 3px solid #2dd4bf;
+        }
+
+        .about-story {
+            background: #11141c;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .about-story h2, .about-story h3 {                                                                                          
+            color: #2dd4bf;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-story p {
+            color: #9ca3af;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: #06080c;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid #1f2937;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #1f2937;
+            color: #6b7280;
+            font-size: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 35px;
+            height: 35px;
+            background: #11141c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+        }
+
+        .live-chat {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 55px;
+            height: 55px;
+            background: #2dd4bf;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(45,212,191,0.5);
+            z-index: 1000;
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 5rem;
+            right: 2rem;
+            width: 300px;
+            background: #11141c;
+            border-radius: 1rem;
+            border: 1px solid #2dd4bf;
+            display: none;
+            z-index: 1001;
+        }
+
+        .chat-window.active {
+            display: block;
+        }
+
+        .chat-header {
+            background: #2dd4bf;
+            padding: 0.75rem;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            justify-content: space-between;
+            color: #0a0c10;
+        }
+
+        .chat-body {
+            height: 250px;
+            overflow-y: auto;
+            padding: 0.75rem;
+        }
+
+        .chat-message.sent {
+            text-align: right;
+        }
+
+        .chat-message.sent p {
+            background: #2dd4bf;
+            color: #0a0c10;
+            display: inline-block;
+            padding: 0.5rem 0.75rem;
+            border-radius: 1rem;
+        }
+
+        .chat-message.received p {
+            background: #0a0c10;
+            display: inline-block;
+            padding: 0.5rem 0.75rem;
+            border-radius: 1rem;
+        }
+
+        .chat-footer {
+            display: flex;
+            padding: 0.75rem;
+            border-top: 1px solid #1f2937;
+        }
+
+        .chat-footer input {
+            flex: 1;
+            padding: 0.5rem;
+            background: #0a0c10;
+            border: 1px solid #1f2937;
+            border-radius: 0.5rem;
+            color: white;
+        }
+
+        .rating-stars {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .rating-stars i {
+            color: #4a5568;
+            transition: color 0.2s;
+        }
+
+        .rating-stars i.active {
+            color: #fbbf24;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #11141c;
+            border-radius: 1rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 2rem;
+            border: 1px solid #2dd4bf;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #2dd4bf;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            .nav-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .hero {
+                flex-direction: column;
+                padding: 2rem;
+            }
+            .hero-stats {
+                justify-content: center;
+            }
+            .dashboard-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-wrapper">
+            <div class="logo">
+                <h1>🏥BSEM1202 Group D Health Services</h1>
+                <p>Excellence in Healthcare | Sierra Leone</p>
+            </div>
+            <div class="mobile-menu-btn" onclick="toggleMenu()">☰</div>
+            <ul class="nav-menu" id="navMenu">
+    <li><a onclick="showPage('home')" class="nav-link active">Home</a></li>
+    <li><a onclick="showPage('leadership')" class="nav-link">Leadership</a></li>
+    <li><a onclick="showPage('services')" class="nav-link">Services</a></li>
+    <li><a onclick="showPage('doctors')" class="nav-link">Doctors</a></li>
+    <li><a onclick="showPage('appointments')" class="nav-link">Appointments</a></li>
+    <li><a onclick="showPage('dashboard')" class="nav-link">Dashboard</a></li>
+    <li><a onclick="showPage('ratings')" class="nav-link">Ratings</a></li>
+    <li><a onclick="showPage('contact')" class="nav-link">Contact</a></li>
+    <li><a onclick="showPage('emergency')" class="nav-link">🚑 Emergency</a></li>
+    <li><a onclick="showPage('patient')" class="nav-link">👤 Patient Portal</a></li>
+    <li><a onclick="showPage('pharmacy')" class="nav-link">💊 Pharmacy</a></li>
+    <li><a onclick="showPage('blog')" class="nav-link">📰 Health Blog</a></li>
+</ul>
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="Search doctors...">
+                <button onclick="performSearch()"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main id="mainContent"></main>
+
+<div class="live-chat" onclick="toggleChat()">
+    <i class="fas fa-comment-dots"></i>
+</div>
+<div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+        <span>💬 Live Support</span>
+        <span onclick="toggleChat()" style="cursor:pointer;">✕</span>
+    </div>
+    <div class="chat-body" id="chatBody">
+        <div class="chat-message received">
+            <p>Hello! Welcome to Group D Health Services. How can we assist you today?</p>
+            <small>Online now</small>
+        </div>
+    </div>
+    <div class="chat-footer">
+        <input type="text" id="chatInput" placeholder="Type your message...">
+        <button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+</div>
+
+<div id="serviceModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle"></h2>
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+        </div>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>🏥BSEM1202 Group D Health Services</h3>
+                <p>Transforming healthcare across Sierra Leone with modern facilities and compassionate care.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul style="list-style: none;">
+                    <li><a onclick="showPage('home')" style="cursor:pointer;">Home</a></li>
+                    <li><a onclick="showPage('leadership')" style="cursor:pointer;">Leadership</a></li>
+                    <li><a onclick="showPage('doctors')" style="cursor:pointer;">Doctors</a></li>
+                    <li><a onclick="showPage('appointments')" style="cursor:pointer;">Appointments</a></li>
+                    <li><a onclick="showPage('dashboard')" style="cursor:pointer;">Dashboard</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Emergency</h4>
+                <ul style="list-style: none;">
+                    <li>🚑 Ambulance: <strong>999</strong></li>
+                    <li>📞 Freetown HQ: +232 76 888001</li>
+                    <li>📞 Bo: +232 78 554433</li>
+                    <li>📞 Kenema: +232 88 998877</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Group D Health | Owner: Petros Joel Kamara | Co-Founder: Adama Caroline Bangura | Manager: Alhaji Babah Mansaray | Finance Manager: Shebora Kamara</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // ==========================================
+    // ALL 12 LOCATIONS FROM YOUR BRIEF
+    // ==========================================
+    const locations = [
+        { name: "Freetown Headquarters", address: "Joelpkdrive, Freetown", phoneAfricell: "+232 99 991155", phoneOrange: "+232 78 999222", phoneQcell: "+232 031 111333", email: "hq@groupdhealth.sl", headDoctor: "Dr. Alhaji Kesuma Kamara" },
+        { name: "Freetown Carolinelane", address: "Carolinelane, Freetown", phoneAfricell: "+232 77 123456", phoneOrange: "+232 76 444555", phoneQcell: "+232 034 666777", email: "carolinelane@groupdhealth.sl", headDoctor: "Dr. Louisa C. Lahood" },
+        { name: "Bo Hospital", address: "Bo City, Southern Province", phoneAfricell: "+232 78 554433", phoneOrange: "+232 76 667788", phoneQcell: "+232 88 889900", email: "bo@groupdhealth.sl", headDoctor: "Dr. Osman Adu Daramy" },
+        { name: "Kenema Hospital", address: "Kenema City, Eastern Province", phoneAfricell: "+232 88 998877", phoneOrange: "+232 77 112233", phoneQcell: "+232 76 334455", email: "kenema@groupdhealth.sl", headDoctor: "Dr. Dwight Allan Doherty" },
+        { name: "Makeni Hospital", address: "Makeni City, Northern Province", phoneAfricell: "+232 99 112233", phoneOrange: "+232 76 445566", phoneQcell: "+232 77 778899", email: "makeni@groupdhealth.sl", headDoctor: "Dr. Fatima Jebbeh Davies" },
+        { name: "Port Loko Clinic", address: "Port Loko City", phoneAfricell: "+232 30 987654", phoneOrange: "+232 76 123789", phoneQcell: "+232 77 456123", email: "portloko@groupdhealth.sl", headDoctor: "Dr. Victor Nasty" },
+        { name: "Bonth Clinic", address: "Bonth, Southern Province", phoneAfricell: "+232 76 443322", phoneOrange: "+232 77 554433", phoneQcell: "+232 88 665544", email: "bonth@groupdhealth.sl", headDoctor: "Dr. Cynthia" },
+        { name: "Moyamba Clinic", address: "Moyamba Town", phoneAfricell: "+232 77 554433", phoneOrange: "+232 76 776655", phoneQcell: "+232 88 887766", email: "moyamba@groupdhealth.sl", headDoctor: "Dr. Sylvia" },
+        { name: "Waterloo Clinic", address: "Waterloo, Western Rural", phoneAfricell: "+232 76 334456", phoneOrange: "+232 77 445567", phoneQcell: "+232 88 556678", email: "waterloo@groupdhealth.sl", headDoctor: "Dr. Mariama Sajor Barrie" },
+        { name: "Lumley Clinic", address: "Lumley, Freetown", phoneAfricell: "+232 77 556678", phoneOrange: "+232 76 667789", phoneQcell: "+232 88 778890", email: "lumley@groupdhealth.sl", headDoctor: "Dr. Naimah Kallon" },
+        { name: "Aberdeen Clinic", address: "Aberdeen, Freetown", phoneAfricell: "+232 78 778890", phoneOrange: "+232 76 889901", phoneQcell: "+232 88 990012", email: "aberdeen@groupdhealth.sl", headDoctor: "Dr. Amisha D. Bangura" },
+        { name: "Hill Station Clinic", address: "Hill Station, Freetown", phoneAfricell: "+232 88 990012", phoneOrange: "+232 77 001122", phoneQcell: "+232 76 112233", email: "hillstation@groupdhealth.sl", headDoctor: "Dr. Shebora Kamara" }
+    ];
+
+    // ==========================================
+    // MEDICAL DOCTORS WITH SPECIALIZATIONS
+    // ==========================================
+    const medicalDoctors = [
+        { id: 1, name: "Dr. Alhaji Kesuma Kamara", specialty: "Head Doctor - Cardiologist", expertise: ["Cardiology", "Heart", "Chest Pain", "Heart Attack", "Blood Pressure"], location: "Freetown Headquarters", image: "images/kesuma.png", role: "medical" },
+        { id: 2, name: "Dr. Louisa C. Lahood", specialty: "Physiologist", expertise: ["Physiotherapy", "Rehabilitation", "Muscle Pain", "Joint Pain", "Movement"], location: "Freetown Carolinelane", image: "images/lulu.png", role: "medical" },
+        { id: 3, name: "Dr. Mariama Sajor Barrie", specialty: "Head Nurse (2nd in Command)", expertise: ["Nursing", "General Care", "Emergency Triage", "Bedside Care"], location: "Freetown Headquarters", image: "images/sajor.png", role: "medical", isHeadNurse: true },
+        { id: 4, name: "Dr. Osman Adu Daramy", specialty: "Surgeon", expertise: ["Surgery", "Operation", "Appendicitis", "Tumor", "Laceration"], location: "Bo", image: "images/osman.png", role: "medical" },
+        { id: 5, name: "Dr. Dwight Allan Doherty", specialty: "General Medicine", expertise: ["General Checkup", "Fever", "Cold", "Flu", "Vaccination", "Routine"], location: "Kenema", image: "images/dwight.jpg", role: "medical" },
+        { id: 6, name: "Dr. Fatima Jebbeh Davies", specialty: "Pediatrician", expertise: ["Children", "Baby", "Pediatrics", "Vaccination", "Child Fever"], location: "Makeni", image: "images/fatima.jpg", role: "medical" },
+        { id: 7, name: "Dr. Valentine Koroma", specialty: "Emergency Nurse", expertise: ["Emergency", "Accident", "Trauma", "First Aid", "Urgent"], location: "Port Loko", image: "images/valentine.png", role: "medical" },
+        { id: 8, name: "Dr. Abass Alhaji Kargbo", specialty: "Senior Nurse", expertise: ["Nursing", "Patient Care", "Wound Dressing"], location: "Bonth", image: "images/abass.png", role: "medical" },
+        { id: 9, name: "Dr. Paulinet Koroma", specialty: "Senior Nurse", expertise: ["Nursing", "Elderly Care", "Chronic Care"], location: "Moyamba", image: "images/paulinet.png", role: "medical" },
+        { id: 10, name: "Dr. Amisha D. Bangura", specialty: "Registered Nurse", expertise: ["Nursing", "General Ward", "Patient Education"], location: "Freetown Headquarters", image: "images/amisha.png", role: "medical" },
+        { id: 11, name: "Dr. Naimah Kallon", specialty: "Senior Pharmacist & Nurse Supervisor", expertise: ["Pharmacy", "Medicine", "Drugs", "Prescription", "Medication"], location: "Freetown Headquarters", image: "images/naimah.png", role: "medical", isSupervisor: true },
+        { id: 12, name: "Dr. Attarkusie Ramadan Bangura", specialty: "Pediatric Nurse", expertise: ["Children", "Baby Care", "Pediatric Nursing"], location: "Freetown Headquarters", image: "images/kusie.png", role: "medical" }
+    ];
+
+    // ==========================================
+    // FINANCE TEAM (Shebora Kamara)
+    // ==========================================
+    const financeTeam = [
+        { id: 101, name: "Shebora Kamara", specialty: "Finance Manager", expertise: ["Payment", "Bill", "Invoice", "Insurance", "Cost", "Salary", "Finance"], location: "Freetown Carolinelane", image: "images/shebora.png", role: "finance" }
+    ];
+
+    // ==========================================
+    // LEADERSHIP TEAM
+    // ==========================================
+    const leaders = [
+        { id: 201, name: "Petros Joel Kamara", specialty: "CEO & Founder", background: "Limkokwing University (Software Engineering) + USA Medical Studies", location: "Sierra Leone", image: "images/joel.png" },
+        { id: 202, name: "Adama Caroline Bangura", specialty: "Co-Founder & COO", background: "Limkokwing University (Public Health) + USA Healthcare Management", location: "Sierra Leone", image: "images/adama.png" },
+        { id: 203, name: "Alhaji Babah Mansaray", specialty: "General Manager", background: "12+ years in Hospital Administration", location: "All locations", image: "images/babah.png" },
+        { id: 204, name: "Alieu B. Kamara", specialty: "Head Supervisor", background: "15+ years in Healthcare Quality Assurance", location: "ALL LOCATIONS", image: "images/alieu.png" }
+    ];
+
+    const allStaff = [...medicalDoctors, ...financeTeam];
+    let appointments = JSON.parse(localStorage.getItem('groupd_appointments')) || [];
+    let ratings = JSON.parse(localStorage.getItem('groupd_ratings')) || [];
+
+    function saveAppointments() { localStorage.setItem('groupd_appointments', JSON.stringify(appointments)); }
+    function getAverageRating() { if (ratings.length === 0) return 0; const sum = ratings.reduce((a, b) => a + b.stars, 0); return (sum / ratings.length).toFixed(1); }
+    function addRating(r) { ratings.push(r); localStorage.setItem('groupd_ratings', JSON.stringify(ratings)); }
+
+    // ==========================================
+    // INTELLIGENT MATCHING ENGINE
+    // ==========================================
+    function findCorrectDoctor(symptoms, selectedDoctorName) {
+        const selectedDoc = allStaff.find(d => d.name === selectedDoctorName);
+        if (!selectedDoc) return { match: false, message: "Doctor not found.", suggested: null };
+        
+        // Finance vs Medical logic
+        if (selectedDoc.role === "finance") {
+            const financeKeywords = ["payment", "bill", "money", "insurance", "cost", "fee", "salary", "invoice", "finance"];
+            const isFinanceQuery = financeKeywords.some(k => symptoms.toLowerCase().includes(k));
+            if (!isFinanceQuery) {
+                return { match: false, message: `❌ ${selectedDoc.name} is the Finance Manager. For medical issues (${symptoms}), please book a Medical Doctor.`, suggested: medicalDoctors[0] };
+            }
+            return { match: true, message: "✅ Finance inquiry routed correctly." };
+        }
+        
+        // Medical Doctor Logic
+        if (selectedDoc.role === "medical") {
+            const matchedExpertise = selectedDoc.expertise.some(exp => symptoms.toLowerCase().includes(exp.toLowerCase()));
+            if (!matchedExpertise) {
+                const suggested = medicalDoctors.find(d => d.expertise.some(exp => symptoms.toLowerCase().includes(exp.toLowerCase()))) || medicalDoctors[0];
+                return { match: false, message: `❌ Dr. ${selectedDoc.name} specializes in ${selectedDoc.expertise.join(', ')}. For "${symptoms}", please book ${suggested.name} (${suggested.specialty}).`, suggested: suggested };
+            }
+            return { match: true, message: "✅ Specialist matched successfully." };
+        }
+        return { match: false, message: "Unable to process request.", suggested: null };
+    }
+
+    function addAppointment(appt) {
+        const existing = appointments.find(a => a.doctor === appt.doctor && a.date === appt.date);
+        if (existing) return { success: false, message: `❌ Dr. ${appt.doctor} is already booked for ${appt.date}. Please choose another date.` };
+        
+        const validation = findCorrectDoctor(appt.symptoms, appt.doctor);
+        if (!validation.match) {
+            return { success: false, message: validation.message, suggested: validation.suggested };
+        }
+        
+        appt.id = Date.now();
+        appointments.push(appt);
+        saveAppointments();
+        return { success: true, message: `✅ Thank you ${appt.name}. Your appointment with ${appt.doctor} on ${appt.date} has been confirmed.` };
+    }
+
+    // ==========================================
+    // SERVICES LIST
+    // ==========================================
+    const servicesList = [
+        { id: 1, name: "Cardiology", icon: "fas fa-heartbeat", description: "Heart health assessments and treatments.", head: "Dr. Alhaji Kesuma Kamara" },
+        { id: 2, name: "Surgery", icon: "fas fa-scalpel", description: "Advanced surgical procedures.", head: "Dr. Osman Adu Daramy" },
+        { id: 3, name: "Pediatrics", icon: "fas fa-baby", description: "Specialized care for children.", head: "Dr. Fatima Jebbeh Davies" },
+        { id: 4, name: "Pharmacy", icon: "fas fa-capsules", description: "Full-service pharmacy.", head: "Dr. Naimah Kallon" },
+        { id: 5, name: "Physiotherapy", icon: "fas fa-walking", description: "Rehabilitation and physical therapy.", head: "Dr. Louisa C. Lahood" },
+        { id: 6, name: "Emergency Care", icon: "fas fa-ambulance", description: "24/7 emergency services.", head: "Dr. valentine Koroma" },
+        { id: 7, name: "General Consultation", icon: "fas fa-stethoscope", description: "Routine medical checkups.", head: "Dr. Dwight Allan Doherty" },
+        { id: 8, name: "Nursing Care", icon: "fas fa-hand-holding-heart", description: "Compassionate patient care.", head: "Dr. Mariama Sajor Barrie" }
+    ];
+
+    // ==========================================
+    // UI FUNCTIONS
+    // ==========================================
+    function showMessage(elId, msg, type) { const el = document.getElementById(elId); if(el) el.innerHTML = `<div class="alert-${type}">${msg}</div>`; setTimeout(() => { if(el) el.innerHTML = ''; }, 5000); }
+    function closeModal() { document.getElementById('serviceModal').style.display = 'none'; }
+    function toggleMenu() { document.getElementById('navMenu').classList.toggle('active'); }
+    function toggleChat() { document.getElementById('chatWindow').classList.toggle('active'); }
+    function sendChatMessage() {
+    const input = document.getElementById('chatInput');
+    const msg = input.value.trim().toLowerCase();
+    if (!msg) return;
+    
+    const chatBody = document.getElementById('chatBody');
+    chatBody.innerHTML += `<div class="chat-message sent"><p>${input.value}</p></div>`;
+    input.value = '';
+    
+    setTimeout(() => {
+        let reply = "";
+        
+        if (msg.includes("hello") || msg.includes("hi")) {
+            reply = "Hello! Welcome to Group D Health Services. How can I assist you today? You can ask about our doctors, services, locations, emergency numbers, or health tips.";
+        }
+        else if (msg.includes("doctor") || msg.includes("specialist")) {
+            reply = "We have many specialist doctors including: Dr. Alhaji Kesuma Kamara (Cardiologist), Dr. Osman Adu Daramy (Surgeon), Dr. Fatima Jebbeh Davies (Pediatrician), and more. Which specialty are you looking for?";
+        }
+        else if (msg.includes("heart") || msg.includes("chest pain")) {
+            reply = "For heart-related issues, please book an appointment with Dr. Alhaji Kesuma Kamara, our Head Cardiologist. He specializes in chest pain, heart attacks, and blood pressure management.";
+        }
+        else if (msg.includes("surgery")) {
+            reply = "Our expert surgeon is Dr. Osman Adu Daramy with 15+ years of experience. He performs general and specialized surgeries at our Bo Hospital.";
+        }
+        else if (msg.includes("child") || msg.includes("baby") || msg.includes("pediatric")) {
+            reply = "Dr. Fatima Jebbeh Davies is our Pediatrician (Baby Doctor). She specializes in child healthcare, vaccinations, and treatment of childhood illnesses.";
+        }
+        else if (msg.includes("emergency") || msg.includes("ambulance")) {
+            reply = "🚑 For medical emergencies, call our ambulance service at 999 immediately. We have 24/7 emergency services at all 12 locations across Sierra Leone.";
+        }
+        else if (msg.includes("location") || msg.includes("hospital")) {
+            reply = "We have 12 locations: Freetown Headquarters (Joelpkdrive), Freetown Carolinelane, Bo, Kenema, Makeni, Port Loko, Bonth, Moyamba, Waterloo, Lumley, Aberdeen, and Hill Station. Which one is nearest to you?";
+        }
+        else if (msg.includes("appointment") || msg.includes("book")) {
+            reply = "To book an appointment, go to the 'Appointments' page in our menu. You can choose your preferred doctor, date, and time slot. Our system will match you with the right specialist based on your symptoms.";
+        }
+        else if (msg.includes("pharmacy") || msg.includes("medicine")) {
+            reply = "Visit our 'Pharmacy' page to order medicines online. You can choose home delivery within Freetown (2-3 hours) or pick up at any of our locations. We accept payment on delivery or online.";
+        }
+        else if (msg.includes("price") || msg.includes("cost")) {
+            reply = "For pricing information, please contact our Finance Manager Shebora Kamara or visit the 'Contact' page. We also accept health insurance and offer payment plans.";
+        }
+        else if (msg.includes("insurance")) {
+            reply = "We accept all major health insurance plans. For insurance claims, please contact our Finance Department.";
+        }
+        else if (msg.includes("fever") || msg.includes("malaria")) {
+            reply = "If you have fever, please visit any of our locations for malaria testing. Early treatment is important. You can book a general consultation with Dr. Dwight Allan Doherty.";
+        }
+        else if (msg.includes("payment") || msg.includes("bill")) {
+            reply = "For payment and billing inquiries, please contact Shebora Kamara, our Finance Manager. You can reach her through the Finance tab in Appointments.";
+        }
+        else if (msg.includes("thank")) {
+            reply = "You're welcome! Thank you for choosing Group D Health Services. Is there anything else I can help you with?";
+        }
+        else {
+            reply = "Thank you for your message. For specific medical concerns, please book an appointment with one of our doctors. For emergencies, call 999 immediately. Our team is here to help!";
+        }
+        
+        chatBody.innerHTML += `<div class="chat-message received"><p>${reply}</p></div>`;
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }, 500);
+    
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+    function performSearch() { const q = document.getElementById('searchInput').value.toLowerCase(); if(q.includes('doctor')) showPage('doctors'); else if(q.includes('appointment')) showPage('appointments'); else showPage('home'); }
+    function bookDoctor(name) { showPage('appointments'); setTimeout(() => { const sel = document.getElementById('aptDoctor'); if(sel) sel.value = name; }, 100); }
+    function deleteAppointment(id) { appointments = appointments.filter(a => a.id !== id); saveAppointments(); showPage('dashboard'); }
+    function deleteRating(id) { ratings = ratings.filter(r => r.id !== id); localStorage.setItem('groupd_ratings', JSON.stringify(ratings)); showPage('dashboard'); }
+    function showTab(tabId) { document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active')); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.getElementById(tabId).classList.add('active'); if(event && event.target) event.target.classList.add('active'); }
+    function showServiceDetails(s) {
+        document.getElementById('modalTitle').innerHTML = `<i class="${s.icon}"></i> ${s.name}`;
+        document.getElementById('modalBody').innerHTML = `<p>${s.description}</p><p><strong>👨‍⚕️ Head of Department:</strong> ${s.head}</p><button class="btn btn-primary" onclick="bookDoctor('${s.head}'); closeModal();">Book with ${s.head}</button>`;
+        document.getElementById('serviceModal').style.display = 'flex';
+    }
+
+    // ==========================================
+    // PAGE RENDERING
+    // ==========================================
+    function showPage(page) {
+        const content = document.getElementById('mainContent');
+        
+        if (page === 'home') {
+            content.innerHTML = `<div class="container"><div class="hero"><div class="hero-content"><span class="hero-badge">🏥 Premier Healthcare in Sierra Leone</span><h1>Your Health is <span>Our Priority</span></h1><p>Group D Health Services - Founded by Petros Joel Kamara & Adama Caroline Bangura (Limkokwing University + USA Medical Studies) and the general manager Alhaji baba mansaray.</p><div class="hero-buttons"><button class="btn btn-primary" onclick="showPage('appointments')">📅 Smart Booking</button><button class="btn btn-outline" onclick="showPage('leadership')">👥 Our Story</button></div><div class="hero-stats"><div><div class="stat-number">${locations.length}</div><div>Locations</div></div><div><div class="stat-number">${medicalDoctors.length}</div><div>Specialists</div></div><div><div class="stat-number">⭐ ${getAverageRating()}</div><div>Rating</div></div></div></div><div class="hero-image"><img src="images/image.png"  alt="Healthcare"></div></div><h2 class="section-title">Our <span>Services</span></h2><div class="cards-grid">${servicesList.map(s => `<div class="service-card" onclick="showServiceDetails(${JSON.stringify(s).replace(/"/g, '&quot;')})"><i class="${s.icon} service-icon"></i><h3>${s.name}</h3><p>${s.description}</p><small>Head: ${s.head}</small></div>`).join('')}</div><h2 class="section-title">Our <span>Locations</span></h2><div class="cards-grid">${locations.slice(0,6).map(l => `<div class="service-card"><i class="fas fa-hospital service-icon"></i><h3>${l.name}</h3><p>📍 ${l.address}</p><p>👨‍⚕️ Head: ${l.headDoctor}</p><small>📞 ${l.phoneAfricell}</small></div>`).join('')}</div></div>`;
+        }
+        else if (page === 'leadership') {
+    content.innerHTML = `<div class="container">
+        <h1 class="section-title">Our <span>Leadership</span></h1>
+        
+        <div class="cards-grid">
+            <!-- Petros Joel Kamara -->
+            <div class="leader-card">
+                <div class="leader-image">
+                    <img src="images/joel.png" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-user-circle\'></i></div>'">
+                </div>
+                <div class="doctor-info">
+                    <h3 class="doctor-name">Petros Joel Kamara</h3>
+                    <p class="doctor-specialty">Founder & Owner</p>
+                    <p class="doctor-expertise">🎓 Limkokwing University (Software Engineering)</p>
+                    <p class="doctor-expertise">🇺🇸 Johns Hopkins University (Professor in Medicine)</p>
+                    <p class="doctor-location">📍 Sierra Leone</p>
+                </div>
+            </div>
+            
+            <!-- Adama Caroline Bangura -->
+            <div class="leader-card">
+                <div class="leader-image">
+                    <img src="images/adama.png" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-user-circle\'></i></div>'">
+                </div>
+                <div class="doctor-info">
+                    <h3 class="doctor-name">Adama Caroline Bangura</h3>
+                    <p class="doctor-specialty">Co-Founder & COO</p>
+                    <p class="doctor-expertise">🎓 Limkokwing University (Software Engineering)</p>
+                    <p class="doctor-expertise">🇺🇸 Harvard University (Healthcare Management and medicine)</p>
+                    <p class="doctor-location">📍 Sierra Leone</p>
+                </div>
+            </div>
+            
+            <!-- Alhaji Babah Mansaray -->
+            <div class="leader-card">
+                <div class="leader-image">
+                    <img src="images/babah.png" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-user-tie\'></i></div>'">
+                </div>
+                <div class="doctor-info">
+                    <h3 class="doctor-name">Alhaji Babah Mansaray</h3>
+                    <p class="doctor-specialty">General Manager</p>
+                    <p class="doctor-expertise">📋 12+ years in Hospital Administration</p>
+                    <p class="doctor-location">📍 Freetown Headquarters</p>
+                </div>
+            </div>
+            
+            <!-- Alieu B. Kamara -->
+            <div class="leader-card">
+                <div class="leader-image">
+                    <img src="images/alieu.png" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-user-shield\'></i></div>'">
+                </div>
+                <div class="doctor-info">
+                    <h3 class="doctor-name">Alieu B. Kamara</h3>
+                    <p class="doctor-specialty">Head Supervisor</p>
+                    <p class="doctor-expertise">✅ 15+ years in Healthcare Quality Assurance</p>
+                    <p class="doctor-location">📍 Freetown Headquarters</p>
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="section-title" style="margin-top: 2rem;">Medical <span>Leadership</span></h2>
+        <div class="cards-grid">
+            <!-- Dr. Alhaji Kesuma Kamara -->
+            <div class="leader-card">
+                <div class="leader-image">
+                    <img src="images/kesuma.png" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-heartbeat\'></i></div>'">
+                </div>
+                <div class="doctor-info">
+                    <h3 class="doctor-name">Dr. Alhaji Kesuma Kamara</h3>
+                    <p class="doctor-specialty">Head Doctor & Chief Cardiologist</p>
+                    <p class="doctor-expertise">❤️ 18+ years of experience</p>
+                    <p class="doctor-location">📍 Freetown Headquarters</p>
+                </div>
+            </div>
+            
+            <!-- Dr. Mariama Sajor Barrie -->
+            <div class="leader-card">
+                <div class="leader-image">
+                    <img src="images/sajor.png" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-user-nurse\'></i></div>'">
+                </div>
+                <div class="doctor-info">
+                    <h3 class="doctor-name">Dr. Mariama Sajor Barrie</h3>
+                    <p class="doctor-specialty">Head Nurse</p>
+                    <p class="doctor-expertise">🩺 14+ years of nursing experience</p>
+                    <p class="doctor-location">📍 Freetown Headquarters</p>
+                </div>
+            </div>
+            
+            <!-- Dr. Naimah Kallon -->
+            <div class="leader-card">
+                <div class="leader-image">
+                    <img src="images/naimah.png" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-capsules\'></i></div>'">
+                </div>
+                <div class="doctor-info">
+                    <h3 class="doctor-name">Dr. Naimah Kallon</h3>
+                    <p class="doctor-specialty">Senior Pharmacist & Nurse Supervisor</p>
+                    <p class="doctor-expertise">💊 11+ years of experience</p>
+                    <p class="doctor-location">📍 Freetown Headquarters</p>
+                </div>
+            </div>
+            
+            <!-- Shebora Kamara -->
+            <div class="leader-card">
+                <div class="leader-image">
+                    <img src="images/shebora.png" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-calculator\'></i></div>'">
+                </div>
+                <div class="doctor-info">
+                    <h3 class="doctor-name">Shebora Kamara</h3>
+                    <p class="doctor-specialty">Finance Manager</p>
+                    <p class="doctor-expertise">💰 Handles billing, insurance, and payments</p>
+                    <p class="doctor-location">📍 Freetown Carolinelane</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="about-story">
+            <h2>The Limkokwing & USA Vision</h2>
+            
+            <h3>👨‍💼 The Founders</h3>
+            <p><strong>Petros Joel Kamara</strong> and <strong>Adama Caroline Bangura</strong> first met at <strong>Limkokwing University of Creative Innovation and Technology, Sierra Leone</strong>. Petros earned his Bachelor's degree in <strong>Software Engineering</strong>, while Adama earned her degree in <strong>Also Software Engineering</strong>. After graduating with honors, both pursued advanced studies in the <strong>United States of America</strong> - Petros at Johns Hopkins University (Healthcare Informatics) and Adama at Harvard University (Healthcare Management).</p>
+            
+            <p>Upon returning to Sierra Leone, they combined their skills to create <strong>Group D Health Services</strong>. As <strong>Owner and Founder</strong>, Petros oversees technology and software development. As <strong>Co-Founder and COO</strong>, Adama manages daily operations and strategic growth.</p>
+            
+            <h3>📋 The General Manager</h3>
+            <p><strong>Alhaji Babah Mansaray</strong> joined as <strong>General Manager</strong> in 2019 with over 12 years of hospital administration experience. He transformed the startup into a growing healthcare network, overseeing all administrative operations across 12 locations.</p>
+            
+            <h3>👨‍⚕️ The Head Doctor</h3>
+            <p><strong>Dr. Alhaji Kesuma Kamara</strong> serves as <strong>Head Doctor and Chief Cardiologist</strong> with 18+ years of experience. He leads all medical operations and specializes in treating heart conditions, chest pain, heart attacks, and high blood pressure.</p>
+            
+            <h3>👩‍⚕️ The Head Nurse</h3>
+            <p><strong>Dr. Mariama Sajor Barrie</strong> serves as <strong>Head Nurse </strong> with 14 years of experience. She leads all nursing departments, supervises nursing staff, and ensures quality patient care across all locations.</p>
+            
+            <h3>👩‍⚕️ The Nurse Supervisor</h3>
+            <p><strong>Dr. Naimah Kallon</strong> serves as <strong>Senior Pharmacist and Nurse Supervisor</strong> with 11 years of experience, overseeing ALL nurses across all 12 locations and managing pharmacy operations.</p>
+            
+            <h3>💰 The Finance Manager</h3>
+            <p><strong>Shebora Kamara</strong> serves as <strong>Finance Manager</strong> with 7 years of experience, handling patient billing, insurance claims, payment plans, and all financial inquiries separately from the medical team.</p>
+            
+            <h3>🏥 The Complete Medical Team</h3>
+            <p>The medical team includes: <strong>Dr. Louisa C. Lahood</strong> (Physiologist, 12 yrs), <strong>Dr. Osman Adu Daramy</strong> (Surgeon, 15 yrs), <strong>Dr. Dwight Allan Doherty</strong> (General Medicine, 20+ yrs), <strong>Dr. Fatima Jebbeh Davies</strong> (Pediatrician, 9 yrs), <strong>Dr. Victor Nasty</strong> (Emergency Nurse, 5 yrs), <strong>Dr. Cynthia</strong> (Senior Nurse, 8 yrs), <strong>Dr. Sylvia</strong> (Senior Nurse, 7 yrs), <strong>Dr. Amisha D. Bangura</strong> (Nurse, 6 yrs), <strong>Dr. Mariam Taylor</strong> (Nurse, 9 yrs), and <strong>Mr. I Don't Care</strong> (Head Receptionist, 5 yrs).</p>
+            
+            <p>This unique blend of <strong>software innovation and clinical medicine</strong> allows Group D Health to use intelligent matching, ensuring patients always see the right specialist for their symptoms.</p>
+            
+            <p>Group D Health now operates <strong>12 locations</strong> across Sierra Leone: Freetown Headquarters (Joelpkdrive), Freetown Carolinelane, Bo, Kenema, Makeni, Port Loko, Bonth, Moyamba, Waterloo, Lumley, Aberdeen, and Hill Station.</p>
+            
+            <p>For emergencies, our <strong>24/7 ambulance service</strong> is available nationwide by calling <strong>999</strong>. We also offer telemedicine consultations for patients who cannot travel to our facilities.</p>
+        </div>
+    </div>`;
+}
+        
+        else if (page === 'services') {
+            content.innerHTML = `<div class="container"><h1 class="section-title">Our Medical <span>Services</span></h1><div class="cards-grid">${servicesList.map(s => `<div class="service-card" onclick="showServiceDetails(${JSON.stringify(s).replace(/"/g, '&quot;')})"><i class="${s.icon} service-icon"></i><h3>${s.name}</h3><p>${s.description}</p><small>👨‍⚕️ Head: ${s.head}</small></div>`).join('')}</div></div>`;
+        }
+        else if (page === 'doctors') {
+            content.innerHTML = `<div class="container"><h1 class="section-title">Medical <span>Specialists</span></h1><div class="cards-grid">${medicalDoctors.map(d => `<div class="doctor-card"><div class="doctor-image"><img src="${d.image}" onerror="this.parentElement.innerHTML='<div class=\\\'image-placeholder\\\'><i class=\\\'fas fa-user-md\\\'></i></div>'"></div><div class="doctor-info"><h3>${d.name}</h3><p>${d.specialty}</p><p class="doctor-expertise"><i class="fas fa-stethoscope"></i> Expertise: ${d.expertise.join(', ')}</p><p>📍 ${d.location}</p><button class="btn btn-outline" onclick="bookDoctor('${d.name}')">Book Appointment</button></div></div>`).join('')}</div><h2 class="section-title">Finance <span>Department</span></h2><div class="cards-grid">${financeTeam.map(d => `<div class="doctor-card"><div class="doctor-image"><img src="${d.image}" onerror="this.parentElement.innerHTML='<div class=\\\'image-placeholder\\\'><i class=\\\'fas fa-calculator\\\'></i></div>'"></div><div class="doctor-info"><h3>${d.name}</h3><p>${d.specialty}</p><p class="doctor-expertise">💰 Handles: Bills, Insurance, Payments, Finance</p><p>📍 ${d.location}</p><button class="btn btn-outline" onclick="bookDoctor('${d.name}')">Financial Inquiry</button></div></div>`).join('')}</div></div>`;
+        }
+        else if (page === 'appointments') {
+    content.innerHTML = `
+        <div class="container">
+            <h1 class="section-title">Book an <span>Appointment</span></h1>
+            <p style="color: #9ca3af; margin-bottom: 1rem;">⚠️ Each doctor can only be booked ONCE per date and time slot. Our system will match you with the right specialist for your symptoms.</p>
+            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showAppointmentTab('medicalTab')">🏥 Medical Appointment</button>
+                <button class="tab-btn" onclick="showAppointmentTab('financeTab')">💰 Finance / Payment</button>
+            </div>
+            
+            <!-- MEDICAL APPOINTMENT TAB -->
+            <div id="medicalTab" class="tab-content active">
+                <div class="form-container">
+                    <form id="aptForm">
+                        <div class="form-group"><label>Full Name *</label><input type="text" id="aptName" required></div>
+                        <div class="form-group"><label>Phone Number *</label><input type="tel" id="aptPhone" required placeholder="077XXXXXX"></div>
+                        <div class="form-group"><label>Email *</label><input type="email" id="aptEmail" required></div>
+                        <div class="form-group">
+                            <label>Select Location *</label>
+                            <select id="aptLocation" required>
+                                <option value="">-- Select Location --</option>
+                                ${locations.map(l => `<option value="${l.name}">${l.name}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Doctor *</label>
+                            <select id="aptDoctor" required>
+                                <option value="">-- Select Doctor --</option>
+                                ${medicalDoctors.map(d => `<option value="${d.name}">${d.name} - ${d.specialty}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Select Date *</label><input type="date" id="aptDate" min="${new Date().toISOString().split('T')[0]}" required></div>
+                        <div class="form-group">
+                            <label>Select Time Slot *</label>
+                            <select id="aptTime" required>
+                                <option value="">-- Select Time --</option>
+                                <option value="Morning Shift (8AM-12PM)">🌅 Morning Shift (8AM-12PM)</option>
+                                <option value="Afternoon Shift (1PM-5PM)">☀️ Afternoon Shift (1PM-5PM)</option>
+                                <option value="Night Shift (6PM-10PM)">🌙 Night Shift (6PM-10PM)</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Describe Your Symptoms *</label><textarea id="aptSymptoms" rows="3" placeholder="e.g., I have chest pain, I need a surgery, my child has fever..."></textarea></div>
+                        <button type="submit" class="btn btn-primary">✅ Book Appointment</button>
+                    </form>
+                    <div id="aptMsg"></div>
+                </div>
+            </div>
+            
+            <!-- FINANCE APPOINTMENT TAB -->
+            <div id="financeTab" class="tab-content">
+                <div class="form-container">
+                    <form id="financeForm">
+                        <div class="form-group"><label>Full Name *</label><input type="text" id="finName" required></div>
+                        <div class="form-group"><label>Phone Number *</label><input type="tel" id="finPhone" required></div>
+                        <div class="form-group"><label>Email *</label><input type="email" id="finEmail" required></div>
+                        <div class="form-group">
+                            <label>Select Location *</label>
+                            <select id="finLocation" required>
+                                <option value="">-- Select Location --</option>
+                                ${locations.map(l => `<option value="${l.name}">${l.name}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Finance Officer *</label>
+                            <select id="finDoctor" required>
+                                <option value="">-- Select Finance Officer --</option>
+                                ${financeTeam.map(d => `<option value="${d.name}">${d.name} - ${d.specialty}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Select Date *</label><input type="date" id="finDate" min="${new Date().toISOString().split('T')[0]}" required></div>
+                        <div class="form-group">
+                            <label>Select Time Slot *</label>
+                            <select id="finTime" required>
+                                <option value="">-- Select Time --</option>
+                                <option value="Morning Shift (8AM-12PM)">🌅 Morning Shift (8AM-12PM)</option>
+                                <option value="Afternoon Shift (1PM-5PM)">☀️ Afternoon Shift (1PM-5PM)</option>
+                                <option value="Night Shift (6PM-10PM)">🌙 Night Shift (6PM-10PM)</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Payment/Billing Inquiry *</label><textarea id="finSymptoms" rows="3" placeholder="e.g., I need to pay my hospital bill, insurance claim..."></textarea></div>
+                        <button type="submit" class="btn btn-primary">📅 Book Finance Meeting</button>
+                    </form>
+                    <div id="finMsg"></div>
+                </div>
+            </div>
+            
+            <!-- APPOINTMENTS LIST -->
+            <div class="form-container">
+                <h3>📋 Your Appointments</h3>
+                <div id="appointmentsList">${appointments.length === 0 ? '<p>No appointments yet. Book one above!</p>' : appointments.map(a => `<div class="appointment-item"><strong>${a.name}</strong><br>👨‍⚕️ ${a.doctor}<br>📅 ${a.date} | ${a.time}<br>📍 ${a.location}<br>📝 "${a.symptoms.substring(0, 50)}"</div>`).join('')}</div>
+            </div>
+        </div>
+    `;
+    
+    // ============================================
+    // SPECIALIZATION MATCHING FUNCTION
+    // ============================================
+    function findCorrectSpecialist(symptoms, selectedDoctorName) {
+        const selectedDoc = medicalDoctors.find(d => d.name === selectedDoctorName);
+        if (!selectedDoc) return { match: false, message: "Doctor not found.", suggested: null };
+        
+        const matchedExpertise = selectedDoc.expertise.some(exp => symptoms.toLowerCase().includes(exp.toLowerCase()));
+        
+        if (!matchedExpertise) {
+            const suggestedDoctor = medicalDoctors.find(d => d.expertise.some(exp => symptoms.toLowerCase().includes(exp.toLowerCase()))) || medicalDoctors[0];
+            return { 
+                match: false, 
+                message: `❌ Dr. ${selectedDoc.name} specializes in ${selectedDoc.expertise.join(', ')}. Based on your symptoms "${symptoms}", we recommend booking <strong>${suggestedDoctor.name}</strong> (${suggestedDoctor.specialty}).`,
+                suggested: suggestedDoctor
+            };
+        }
+        return { match: true, message: "✅ Doctor matches your symptoms!", suggested: null };
+    }
+    
+    // ============================================
+    // MEDICAL APPOINTMENT FORM SUBMIT
+    // ============================================
+    document.getElementById('aptForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const name = document.getElementById('aptName').value;
+        const phone = document.getElementById('aptPhone').value;
+        const email = document.getElementById('aptEmail').value;
+        const location = document.getElementById('aptLocation').value;
+        const doctor = document.getElementById('aptDoctor').value;
+        const date = document.getElementById('aptDate').value;
+        const time = document.getElementById('aptTime').value;
+        const symptoms = document.getElementById('aptSymptoms').value;
+        
+        if (!name || !phone || !email || !location || !doctor || !date || !time || !symptoms) {
+            showMessage('aptMsg', '❌ Please fill in all fields.', 'error');
+            return;
+        }
+        
+        // STEP 1: SPECIALIZATION MATCHING
+        const specializationCheck = findCorrectSpecialist(symptoms, doctor);
+        if (!specializationCheck.match) {
+            showMessage('aptMsg', specializationCheck.message, 'error');
+            if (specializationCheck.suggested) {
+                const doctorSelect = document.getElementById('aptDoctor');
+                if (doctorSelect) doctorSelect.value = specializationCheck.suggested.name;
+            }
+            return;
+        }
+        
+        // STEP 2: CHECK FOR FINANCE VS MEDICAL MISMATCH
+        const financeKeywords = ["payment", "bill", "money", "insurance", "cost", "fee", "salary", "invoice"];
+        const isFinanceQuery = financeKeywords.some(k => symptoms.toLowerCase().includes(k));
+        if (isFinanceQuery) {
+            showMessage('aptMsg', `❌ Your issue appears to be financial ("${symptoms}"). Please use the "Finance / Payment" tab to book with Shebora Kamara.`, 'error');
+            return;
+        }
+        
+        // STEP 3: CHECK DATE AND TIME CONFLICT
+        const existingBooking = appointments.find(a => a.doctor === doctor && a.date === date && a.time === time);
+        if (existingBooking) {
+            showMessage('aptMsg', `❌ Dr. ${doctor} is already booked for ${date} during the ${time}. Please choose a different date or time slot.`, 'error');
+            return;
+        }
+        
+        // STEP 4: ADD APPOINTMENT
+        const newAppt = { id: Date.now(), name, phone, email, location, doctor, date, time, symptoms, type: 'medical' };
+        appointments.push(newAppt);
+        saveAppointments();
+        
+        showMessage('aptMsg', `✅ Thank you ${name}! Your appointment with Dr. ${doctor} on ${date} at ${time} at ${location} has been booked. See you soon!`, 'success');
+        document.getElementById('aptForm').reset();
+        setTimeout(() => showPage('appointments'), 2000);
+    });
+    
+    // ============================================
+    // FINANCE APPOINTMENT FORM SUBMIT
+    // ============================================
+    document.getElementById('financeForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const name = document.getElementById('finName').value;
+        const phone = document.getElementById('finPhone').value;
+        const email = document.getElementById('finEmail').value;
+        const location = document.getElementById('finLocation').value;
+        const doctor = document.getElementById('finDoctor').value;
+        const date = document.getElementById('finDate').value;
+        const time = document.getElementById('finTime').value;
+        const symptoms = document.getElementById('finSymptoms').value;
+        
+        if (!name || !phone || !email || !location || !doctor || !date || !time || !symptoms) {
+            showMessage('finMsg', '❌ Please fill in all fields.', 'error');
+            return;
+        }
+        
+        // Check if this is actually a medical issue
+        const medicalKeywords = ["pain", "fever", "cough", "headache", "surgery", "heart", "baby", "child", "broken", "bleeding", "wound"];
+        const isMedicalQuery = medicalKeywords.some(k => symptoms.toLowerCase().includes(k));
+        if (isMedicalQuery) {
+            showMessage('finMsg', `❌ Your issue appears to be medical ("${symptoms}"). Please use the "Medical Appointment" tab to book with a doctor.`, 'error');
+            return;
+        }
+        
+        // Check for date/time conflict
+        const existingBooking = appointments.find(a => a.doctor === doctor && a.date === date && a.time === time);
+        if (existingBooking) {
+            showMessage('finMsg', `❌ ${doctor} is already booked for ${date} during the ${time}. Please choose a different date or time.`, 'error');
+            return;
+        }
+        
+        const newAppt = { id: Date.now(), name, phone, email, location, doctor, date, time, symptoms, type: 'finance' };
+        appointments.push(newAppt);
+        saveAppointments();
+        
+        showMessage('finMsg', `✅ Thank you ${name}! Your meeting with ${doctor} on ${date} at ${time} at ${location} has been booked.`, 'success');
+        document.getElementById('financeForm').reset();
+        setTimeout(() => showPage('appointments'), 2000);
+    });
+}
+        
+
+        
+        else if (page === 'dashboard') {
+            const today = new Date().toISOString().split('T')[0];
+            const todayAppointments = appointments.filter(a => a.date === today);
+            content.innerHTML = `<div class="container"><h1 class="section-title">Admin <span>Dashboard</span></h1><div class="dashboard-stats"><div class="stat-card"><div class="number">${medicalDoctors.length}</div><div>Doctors</div></div><div class="stat-card"><div class="number">${financeTeam.length}</div><div>Finance</div></div><div class="stat-card"><div class="number">${locations.length}</div><div>Locations</div></div><div class="stat-card"><div class="number">${appointments.length}</div><div>Appointments</div></div><div class="stat-card"><div class="number">${todayAppointments.length}</div><div>Today</div></div><div class="stat-card"><div class="number">${ratings.length}</div><div>Reviews</div></div><div class="stat-card"><div class="number">⭐ ${getAverageRating()}</div><div>Rating</div></div></div><div class="tabs"><button class="tab-btn active" onclick="showTab('dashAppointments')">📋 Bookings</button><button class="tab-btn" onclick="showTab('dashReviews')">⭐ Reviews</button><button class="tab-btn" onclick="showTab('dashLocations')">📍 Locations</button></div><div id="dashAppointments" class="tab-content active"><div class="form-container">${appointments.length === 0 ? '<p>No appointments yet.</p>' : appointments.map(a => `<div class="appointment-item"><strong>${a.name}</strong> | ${a.doctor}<br>📅 ${a.date}<br>📍 ${a.location}<br>📝 "${a.symptoms.substring(0, 50)}"<br><button class="btn btn-danger" style="margin-top:0.5rem;" onclick="deleteAppointment(${a.id})">Delete</button></div>`).join('')}</div></div><div id="dashReviews" class="tab-content"><div class="form-container">${ratings.length === 0 ? '<p>No reviews yet.</p>' : ratings.map(r => `<div style="background:#0a0c10; padding:1rem; margin-bottom:0.5rem;"><div>${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div><strong>${r.name}</strong><p>"${r.comment}"</p><button class="btn btn-danger" onclick="deleteRating(${r.id})">Delete</button></div>`).join('')}</div></div><div id="dashLocations" class="tab-content"><div class="form-container"><div class="cards-grid">${locations.map(l => `<div class="location-card"><h4>🏥 ${l.name}</h4><div>📍 ${l.address}</div><div>📞 A: ${l.phoneAfricell}</div><div>📞 O: ${l.phoneOrange}</div><div>📞 Q: ${l.phoneQcell}</div><div>📧 ${l.email}</div><div>👨‍⚕️ Head: ${l.headDoctor}</div></div>`).join('')}</div></div></div></div>`;
+        }
+        else if (page === 'ratings') {
+            content.innerHTML = `<div class="container"><h1 class="section-title">Rate <span>Our Services</span></h1><div class="form-container"><div class="form-group"><label>Your Name</label><input type="text" id="rateName"></div><div class="form-group"><label>Rating</label><div class="rating-stars" id="stars"><i class="far fa-star" data-r="1"></i><i class="far fa-star" data-r="2"></i><i class="far fa-star" data-r="3"></i><i class="far fa-star" data-r="4"></i><i class="far fa-star" data-r="5"></i></div><input type="hidden" id="selectedStar"></div><div class="form-group"><label>Your Review</label><textarea id="rateComment" rows="4"></textarea></div><button class="btn btn-primary" onclick="submitRate()">Submit Review</button><div id="rateMsg"></div></div><div class="form-container"><h3>Patient Reviews</h3>${ratings.length === 0 ? '<p>No reviews yet. Be the first!</p>' : ratings.slice().reverse().map(r => `<div style="background:#0a0c10; padding:1rem; margin-bottom:0.5rem;"><div>${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div><strong>${r.name}</strong><p>"${r.comment}"</p></div>`).join('')}</div></div>`;
+            document.querySelectorAll('#stars i').forEach(s => { s.onclick = function() { let val = this.getAttribute('data-r'); document.getElementById('selectedStar').value = val; document.querySelectorAll('#stars i').forEach((x,i) => x.className = i < val ? 'fas fa-star active' : 'far fa-star'); }; });
+        }
+        else if (page === 'contact') {
+            content.innerHTML = `<div class="container"><h1 class="section-title">Contact & <span>Locations</span></h1><div class="form-container" style="margin-bottom:1rem;"><h3>🚑 Emergency Ambulance</h3><p style="font-size:2rem; text-align:center;"><strong>999</strong></p><p style="text-align:center;">24/7 Nationwide Service</p></div><div class="cards-grid">${locations.map(l => `<div class="location-card"><h4 class="location-name">🏥 ${l.name}</h4><div class="location-detail"><i class="fas fa-map-marker-alt"></i> ${l.address}</div><div class="location-detail"><i class="fas fa-phone-alt"></i> Africell: ${l.phoneAfricell}</div><div class="location-detail"><i class="fas fa-phone-alt"></i> Orange: ${l.phoneOrange}</div><div class="location-detail"><i class="fas fa-phone-alt"></i> Qcell: ${l.phoneQcell}</div><div class="location-detail"><i class="fas fa-envelope"></i> ${l.email}</div><div class="location-detail"><i class="fas fa-user-md"></i> Head: ${l.headDoctor}</div></div>`).join('')}</div></div>`;
+        }
+        else if (page === 'emergency') {
+    content.innerHTML = `
+        <div class="container">
+            <h1 class="section-title"><span>🚑 Emergency</span> Services</h1>
+            
+            <!-- Emergency Banner -->
+            <div style="background: linear-gradient(135deg, #ef4444, #dc2626); border-radius: 2rem; padding: 3rem; text-align: center; margin-bottom: 2rem;">
+                <i class="fas fa-ambulance" style="font-size: 4rem;"></i>
+                <h2 style="font-size: 3rem; margin: 1rem 0;">24/7 Emergency Hotline</h2>
+                <p style="font-size: 4rem; font-weight: bold;">999</p>
+                <button class="btn btn-primary" style="background: white; color: #dc2626; font-size: 1.5rem; padding: 1rem 2rem;" onclick="window.location.href='tel:999'">
+                    <i class="fas fa-phone"></i> Call Now
+                </button>
+            </div>
+            
+            <!-- Emergency Numbers by Location -->
+            <h2 class="section-title">Emergency Contacts by <span>Location</span></h2>
+            <div class="cards-grid">
+                ${locations.map(l => `
+                    <div class="location-card">
+                        <h3 class="location-name">🏥 ${l.name}</h3>
+                        <div class="location-detail"><i class="fas fa-phone-alt"></i> Emergency: ${l.phoneAfricell}</div>
+                        <div class="location-detail"><i class="fas fa-ambulance"></i> Ambulance: 999</div>
+                        <div class="location-detail"><i class="fas fa-map-marker-alt"></i> ${l.address}</div>
+                    </div>
+                `).join('')}
+            </div>
+            
+            <!-- First Aid Guides -->
+            <h2 class="section-title">First Aid <span>Guides</span></h2>
+            <div class="cards-grid">
+                <div class="service-card">
+                    <i class="fas fa-heartbeat service-icon"></i>
+                    <h3>CPR (Cardiopulmonary Resuscitation)</h3>
+                    <p><strong>Step 1:</strong> Check responsiveness - tap and shout<br>
+                    <strong>Step 2:</strong> Call 999 immediately<br>
+                    <strong>Step 3:</strong> 30 chest compressions (hard and fast)<br>
+                    <strong>Step 4:</strong> 2 rescue breaths<br>
+                    <strong>Step 5:</strong> Repeat until help arrives</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-hand-holding-heart service-icon"></i>
+                    <h3>Choking (Heimlich Maneuver)</h3>
+                    <p><strong>Step 1:</strong> Stand behind the person<br>
+                    <strong>Step 2:</strong> Make a fist above their navel<br>
+                    <strong>Step 3:</strong> Perform quick upward thrusts<br>
+                    <strong>Step 4:</strong> Repeat until object is dislodged<br>
+                    <strong>Step 5:</strong> If unconscious, start CPR</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-tint service-icon"></i>
+                    <h3>Severe Bleeding</h3>
+                    <p><strong>Step 1:</strong> Apply direct pressure with clean cloth<br>
+                    <strong>Step 2:</strong> Elevate the wound above the heart<br>
+                    <strong>Step 3:</strong> Apply pressure bandage<br>
+                    <strong>Step 4:</strong> Do not remove embedded objects<br>
+                    <strong>Step 5:</strong> Seek immediate medical help</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-brain service-icon"></i>
+                    <h3>Stroke (FAST)</h3>
+                    <p><strong>F - Face:</strong> Ask them to smile (drooping?)<br>
+                    <strong>A - Arms:</strong> Can they raise both arms?<br>
+                    <strong>S - Speech:</strong> Is speech slurred?<br>
+                    <strong>T - Time:</strong> Call 999 immediately!</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-fire service-icon"></i>
+                    <h3>Burns</h3>
+                    <p><strong>Step 1:</strong> Cool the burn with cool water (not ice)<br>
+                    <strong>Step 2:</strong> Remove jewelry or tight items<br>
+                    <strong>Step 3:</strong> Cover with sterile gauze<br>
+                    <strong>Step 4:</strong> Do not apply creams or ointments<br>
+                    <strong>Step 5:</strong> Seek medical attention for severe burns</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-bone service-icon"></i>
+                    <h3>Fractures</h3>
+                    <p><strong>Step 1:</strong> Do not try to straighten the bone<br>
+                    <strong>Step 2:</strong> Immobilize the area with a splint<br>
+                    <strong>Step 3:</strong> Apply ice pack (wrapped in cloth)<br>
+                    <strong>Step 4:</strong> Keep the person still<br>
+                    <strong>Step 5:</strong> Seek immediate medical help</p>
+                </div>
+            </div>
+            
+            <!-- What to Bring -->
+            <div class="form-container" style="margin-top: 2rem;">
+                <h3><i class="fas fa-clipboard-list"></i> What to Bring to the Emergency Room</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div>✅ Valid ID (National ID or Passport)</div>
+                    <div>✅ Insurance card (if applicable)</div>
+                    <div>✅ List of current medications</div>
+                    <div>✅ Known allergies information</div>
+                    <div>✅ Previous medical records</div>
+                    <div>✅ Emergency contact numbers</div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+else if (page === 'patient') {
+    let currentUser = JSON.parse(localStorage.getItem('groupd_currentUser')) || null;
+    let users = JSON.parse(localStorage.getItem('groupd_users')) || [];
+    
+    content.innerHTML = `
+        <div class="container">
+            <h1 class="section-title">Patient <span>Portal</span></h1>
+            
+            ${!currentUser ? `
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showPatientTab('loginTab')">🔐 Login</button>
+                <button class="tab-btn" onclick="showPatientTab('registerTab')">📝 Register</button>
+            </div>
+            
+            <div id="loginTab" class="tab-content active">
+                <div class="form-container">
+                    <h3>Login to Your Account</h3>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                    <div id="loginMsg"></div>
+                </div>
+            </div>
+            
+            <div id="registerTab" class="tab-content">
+                <div class="form-container">
+                    <h3>Create New Account</h3>
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="regName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="regEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" id="regPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="regPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" id="regConfirmPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+                    <div id="registerMsg"></div>
+                </div>
+            </div>
+            ` : `
+            <div style="background: linear-gradient(135deg, #1e293b, #0f172a); border-radius: 1rem; padding: 2rem; margin-bottom: 2rem;">
+                <h2>Welcome back, <span style="color: #2dd4bf;">${currentUser.name}</span>!</h2>
+                <p>${currentUser.email} | 📞 ${currentUser.phone}</p>
+                <button class="btn btn-outline" style="margin-top: 1rem;" onclick="logoutPatient()">Logout</button>
+            </div>
+            
+            <h2 class="section-title">Your <span>Appointments</span></h2>
+            <div class="form-container">
+                <div id="patientAppointments">
+                    ${appointments.filter(a => a.email === currentUser.email).length === 0 ? '<p>No upcoming appointments.</p>' : appointments.filter(a => a.email === currentUser.email).map(a => `
+                        <div class="appointment-item">
+                            <strong>👨‍⚕️ ${a.doctor}</strong><br>
+                            📅 ${a.date} | ${a.time || 'Time TBD'}<br>
+                            📍 ${a.location}<br>
+                            📝 "${a.symptoms.substring(0, 50)}"
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            
+            <h2 class="section-title">Medical <span>History</span></h2>
+            <div class="form-container">
+                <div id="medicalHistory">
+                    ${currentUser.medicalHistory && currentUser.medicalHistory.length > 0 ? currentUser.medicalHistory.map(h => `
+                        <div class="appointment-item">
+                            <strong>📅 ${h.date}</strong><br>
+                            👨‍⚕️ Dr. ${h.doctor}<br>
+                            🩺 Diagnosis: ${h.diagnosis}<br>
+                            💊 Prescription: ${h.prescription}
+                        </div>
+                    `).join('') : '<p>No medical history available.</p>'}
+                </div>
+            </div>
+            
+            <h2 class="section-title">Active <span>Prescriptions</span></h2>
+            <div class="form-container">
+                <div id="activePrescriptions">
+                    ${currentUser.prescriptions && currentUser.prescriptions.length > 0 ? currentUser.prescriptions.map(p => `
+                        <div class="appointment-item">
+                            <strong>💊 ${p.medicine}</strong><br>
+                            👨‍⚕️ Prescribed by: Dr. ${p.doctor}<br>
+                            📅 Date: ${p.date}<br>
+                            📝 Dosage: ${p.dosage}
+                            <button class="btn btn-primary" style="margin-top: 0.5rem; padding: 0.25rem 1rem;" onclick="requestRefill('${p.medicine}')">Request Refill</button>
+                        </div>
+                    `).join('') : '<p>No active prescriptions.</p>'}
+                </div>
+            </div>
+            
+            <h2 class="section-title">Billing <span>History</span></h2>
+            <div class="form-container">
+                <div id="billingHistory">
+                    ${currentUser.bills && currentUser.bills.length > 0 ? currentUser.bills.map(b => `
+                        <div class="appointment-item">
+                            <strong>💰 Bill #${b.id}</strong><br>
+                            Amount: Le ${b.amount}<br>
+                            Status: ${b.paid ? '<span style="color:#10b981;">Paid ✅</span>' : '<span style="color:#ef4444;">Pending ❌</span>'}<br>
+                            Date: ${b.date}
+                            ${!b.paid ? `<button class="btn btn-primary" style="margin-top: 0.5rem; padding: 0.25rem 1rem;" onclick="payBill(${b.id})">Pay Now</button>` : ''}
+                        </div>
+                    `).join('') : '<p>No billing history.</p>'}
+                </div>
+            </div>
+            `}
+        </div>
+    `;
+    
+    document.getElementById('loginForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const user = users.find(u => u.email === email && u.password === password);
+        if (user) {
+            localStorage.setItem('groupd_currentUser', JSON.stringify(user));
+            showMessage('loginMsg', '✅ Login successful!', 'success');
+            setTimeout(() => showPage('patient'), 1500);
+        } else {
+            showMessage('loginMsg', '❌ Invalid email or password.', 'error');
+        }
+    });
+    
+    document.getElementById('registerForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('regName').value;
+        const email = document.getElementById('regEmail').value;
+        const phone = document.getElementById('regPhone').value;
+        const password = document.getElementById('regPassword').value;
+        const confirmPassword = document.getElementById('regConfirmPassword').value;
+        
+        if (password !== confirmPassword) {
+            showMessage('registerMsg', '❌ Passwords do not match.', 'error');
+            return;
+        }
+        
+        if (users.find(u => u.email === email)) {
+            showMessage('registerMsg', '❌ Email already registered.', 'error');
+            return;
+        }
+        
+        const newUser = { id: Date.now(), name, email, phone, password, medicalHistory: [], prescriptions: [], bills: [] };
+        users.push(newUser);
+        localStorage.setItem('groupd_users', JSON.stringify(users));
+        localStorage.setItem('groupd_currentUser', JSON.stringify(newUser));
+        showMessage('registerMsg', '✅ Registration successful!', 'success');
+        setTimeout(() => showPage('patient'), 1500);
+    });
+}
+
+else if (page === 'pharmacy') {
+    const medicines = [
+        { id: 1, name: "Paracetamol 500mg", price: "Le 5,000", category: "Pain Relief", description: "For fever and mild pain" },
+        { id: 2, name: "Amoxicillin 250mg", price: "Le 15,000", category: "Antibiotic", description: "For bacterial infections" },
+        { id: 3, name: "Vitamin C 1000mg", price: "Le 8,000", category: "Vitamins", description: "Boosts immune system" },
+        { id: 4, name: "Malaria Drugs (Coartem)", price: "Le 25,000", category: "Antimalarial", description: "Malaria treatment" },
+        { id: 5, name: "Blood Pressure Medication", price: "Le 12,000", category: "Cardiology", description: "For hypertension" },
+        { id: 6, name: "Diabetes Medication", price: "Le 18,000", category: "Diabetes", description: "Blood sugar control" },
+        { id: 7, name: "Cough Syrup", price: "Le 7,000", category: "Cold & Flu", description: "Relieves cough" },
+        { id: 8, name: "Antihistamine", price: "Le 6,000", category: "Allergy", description: "For allergies" },
+        { id: 9, name: "Ibuprofen 400mg", price: "Le 10,000", category: "Pain Relief", description: "For inflammation and pain" },
+        { id: 10, name: "Multivitamin", price: "Le 20,000", category: "Vitamins", description: "Daily multivitamin" },
+        { id: 11, name: "Omeprazole 20mg", price: "Le 9,000", category: "Stomach", description: "For acid reflux" },
+        { id: 12, name: "Cetirizine 10mg", price: "Le 4,000", category: "Allergy", description: "For hay fever" }
+    ];
+    
+    let cart = JSON.parse(localStorage.getItem('pharmacyCart')) || [];
+    function saveCart() { localStorage.setItem('pharmacyCart', JSON.stringify(cart)); }
+    
+    content.innerHTML = `
+        <div class="container">
+            <h1 class="section-title">Online <span>Pharmacy</span></h1>
+            <p style="color: #9ca3af; margin-bottom: 2rem;">Order medicines online for home delivery or pickup at any of our locations.</p>
+            
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+                <div>
+                    <div class="form-group">
+                        <input type="text" id="searchMedicine" placeholder="🔍 Search for medicines..." style="width: 100%; padding: 0.75rem; border-radius: 0.5rem;">
+                    </div>
+                    <div class="cards-grid" id="medicinesGrid"></div>
+                </div>
+                <div>
+                    <div class="form-container">
+                        <h3>🛒 Your Cart</h3>
+                        <div id="cartItems">${cart.length === 0 ? '<p>Cart is empty</p>' : ''}</div>
+                        <div id="cartTotal" style="margin-top: 1rem; font-weight: bold;"></div>
+                        <button class="btn btn-primary" id="checkoutBtn" style="width: 100%; margin-top: 1rem;" ${cart.length === 0 ? 'disabled' : ''}>Proceed to Checkout</button>
+                    </div>
+                    <div class="form-container" style="margin-top: 1rem;">
+                        <h3>ℹ️ Delivery Information</h3>
+                        <p>📍 Free delivery within Freetown</p>
+                        <p>⏰ Delivery within 2-3 hours</p>
+                        <p>💳 Pay on delivery or online</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    function renderMedicines(filter = '') {
+        const grid = document.getElementById('medicinesGrid');
+        const filtered = medicines.filter(m => m.name.toLowerCase().includes(filter.toLowerCase()) || m.category.toLowerCase().includes(filter.toLowerCase()));
+        grid.innerHTML = filtered.map(m => `
+            <div class="service-card">
+                <i class="fas fa-capsules service-icon"></i>
+                <h3>${m.name}</h3>
+                <p>${m.description}</p>
+                <p><strong>${m.price}</strong></p>
+                <p style="font-size: 0.8rem; color: #9ca3af;">${m.category}</p>
+                <button class="btn btn-primary" style="margin-top: 0.5rem; width: 100%;" onclick="addToCart(${m.id}, '${m.name}', '${m.price}')">Add to Cart</button>
+            </div>
+        `).join('');
+    }
+    
+    window.addToCart = function(id, name, price) {
+        const existing = cart.find(i => i.id === id);
+        if (existing) {
+            existing.quantity++;
+        } else {
+            cart.push({ id, name, price, quantity: 1 });
+        }
+        saveCart();
+        renderCart();
+    };
+    
+    function renderCart() {
+        const cartDiv = document.getElementById('cartItems');
+        const totalDiv = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        
+        if (cart.length === 0) {
+            cartDiv.innerHTML = '<p>Cart is empty</p>';
+            totalDiv.innerHTML = '';
+            if (checkoutBtn) checkoutBtn.disabled = true;
+            return;
+        }
+        
+        if (checkoutBtn) checkoutBtn.disabled = false;
+        
+        let total = 0;
+        cartDiv.innerHTML = cart.map(item => {
+            const priceNum = parseInt(item.price.replace(/[^0-9]/g, ''));
+            total += priceNum * item.quantity;
+            return `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; padding: 0.5rem; background: #0a0c10; border-radius: 0.5rem;">
+                    <div><strong>${item.name}</strong><br>${item.price} x ${item.quantity}</div>
+                    <div><button class="btn btn-danger" style="padding: 0.25rem 0.5rem;" onclick="removeFromCart(${item.id})">Remove</button></div>
+                </div>
+            `;
+        }).join('');
+        totalDiv.innerHTML = `<strong>Total: Le ${total.toLocaleString()}</strong>`;
+    }
+    
+    window.removeFromCart = function(id) {
+        cart = cart.filter(i => i.id !== id);
+        saveCart();
+        renderCart();
+    };
+    
+    document.getElementById('searchMedicine')?.addEventListener('input', (e) => renderMedicines(e.target.value));
+   document.getElementById('checkoutBtn')?.addEventListener('click', () => {
+    if (cart.length === 0) return;
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const deliveryMethod = confirm(`Total: Le ${total.toLocaleString()}\n\nClick OK for Home Delivery\nCancel for Pickup at our Pharmacy`);
+    if (deliveryMethod) {
+        const location = prompt("Please enter your delivery address and phone number (e.g., 77 Lumley Road, 077123456):");
+        if (location) {
+            alert(`✅ Order placed successfully!\n\nTotal: Le ${total.toLocaleString()}\nDelivery Address: ${location}\n\nYou will receive a confirmation call within 10 minutes.\nPlease have your exact location ready.`);
+        } else {
+            alert(`✅ Order placed successfully!\n\nTotal: Le ${total.toLocaleString()}\nDelivery: Home Delivery\n\nOur agent will call you for your address.`);
+        }
+    } else {
+        alert(`✅ Order placed successfully!\n\nTotal: Le ${total.toLocaleString()}\nPickup: Any Group D Health Pharmacy\n\nYour order will be ready in 1 hour. Please bring your ID.`);
+    }
+    cart = [];
+    saveCart();
+    renderCart();
+    renderMedicines();
+});
+    renderMedicines();
+    renderCart();
+}
+
+else if (page === 'blog') {
+    const blogPosts = [
+        { id: 1, title: "10 Tips for a Healthy Heart", category: "Cardiology", author: "Dr. Alhaji Kesuma Kamara", date: "May 15, 2024", readTime: "5 min read", content: "Heart disease is one of the leading causes of death worldwide. Here are 10 tips to keep your heart healthy: 1. Eat a balanced diet rich in fruits and vegetables. 2. Exercise regularly for at least 30 minutes daily. 3. Avoid smoking and excessive alcohol. 4. Manage stress through meditation. 5. Get adequate sleep (7-8 hours). 6. Monitor your blood pressure regularly. 7. Control cholesterol levels. 8. Maintain a healthy weight. 9. Stay hydrated. 10. Regular check-ups with your doctor." },
+        { id: 2, title: "Understanding Malaria Prevention", category: "Prevention", author: "Dr. Naimah Kallon", date: "May 10, 2024", readTime: "4 min read", content: "Malaria is preventable and treatable. Use mosquito nets, apply insect repellent, eliminate standing water around your home, and seek medical attention immediately if you experience fever, chills, or body aches." },
+        { id: 3, title: "Nutrition Guide for Expecting Mothers", category: "Maternal Health", author: "Dr. Fatima Jebbeh Davies", date: "May 5, 2024", readTime: "6 min read", content: "Pregnancy requires proper nutrition for both mother and baby. Focus on folic acid, iron, calcium, and protein. Eat small, frequent meals. Stay hydrated. Avoid raw fish, undercooked meat, and excessive caffeine." },
+        { id: 4, title: "Mental Health Awareness in Sierra Leone", category: "Mental Health", author: "Dr. Louisa C. Lahood", date: "April 28, 2024", readTime: "5 min read", content: "Mental health is just as important as physical health. Signs of depression include persistent sadness, loss of interest, changes in sleep and appetite. Seek help from professionals. Practice self-care and talk to someone you trust." },
+        { id: 5, title: "Child Immunization Schedule", category: "Pediatrics", author: "Dr. Fatima Jebbeh Davies", date: "April 20, 2024", readTime: "4 min read", content: "Vaccines save lives. Ensure your child receives BCG at birth, Polio at 6 weeks, Penta at 6 weeks, PCV at 6 weeks, Measles at 9 months, and Yellow Fever at 9 months. Keep a vaccination record." },
+        { id: 6, title: "First Aid Basics Everyone Should Know", category: "Emergency", author: "Dr. Victor Nasty", date: "April 15, 2024", readTime: "7 min read", content: "Basic first aid skills can save lives. Learn CPR, how to stop bleeding, how to treat burns, and what to do during a seizure. Keep a first aid kit at home and in your car." },
+        { id: 7, title: "Diabetes Management Tips", category: "Diabetes", author: "Dr. Dwight Allan Doherty", date: "April 10, 2024", readTime: "5 min read", content: "Managing diabetes requires monitoring blood sugar, eating a balanced diet, exercising regularly, taking medication as prescribed, and regular check-ups with your doctor." },
+        { id: 8, title: "Benefits of Regular Exercise", category: "Wellness", author: "Dr. Mariama Sajor Barrie", date: "April 5, 2024", readTime: "4 min read", content: "Regular exercise reduces risk of chronic diseases, improves mental health, helps with weight management, strengthens bones and muscles, and increases life expectancy." }
+    ];
+    
+    content.innerHTML = `
+        <div class="container">
+            <h1 class="section-title">Health <span>Blog</span></h1>
+            <p style="color: #9ca3af; margin-bottom: 2rem;">Expert health tips, news, and advice from our medical professionals.</p>
+            
+            <div class="form-group">
+                <input type="text" id="blogSearch" placeholder="🔍 Search articles..." style="width: 100%; padding: 0.75rem; border-radius: 0.5rem;">
+            </div>
+            
+            <div class="cards-grid" id="blogGrid"></div>
+            
+            <div class="form-container" style="margin-top: 2rem; text-align: center;">
+                <h3>📧 Subscribe to Our Newsletter</h3>
+                <p>Get weekly health tips and medical updates delivered to your inbox.</p>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+                    <input type="email" id="newsletterEmail" placeholder="Your email address" style="flex: 1;">
+                    <button class="btn btn-primary" id="subscribeNewsBtn">Subscribe</button>
+                </div>
+                <div id="newsletterMsg"></div>
+            </div>
+        </div>
+    `;
+    
+    function renderBlogPosts(filter = '') {
+        const grid = document.getElementById('blogGrid');
+        const filtered = blogPosts.filter(p => p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase()) || p.author.toLowerCase().includes(filter.toLowerCase()));
+        grid.innerHTML = filtered.map(p => `
+            <div class="service-card" style="text-align: left; cursor: pointer;" onclick="showBlogPost(${p.id})">
+                <i class="fas fa-newspaper service-icon"></i>
+                <h3>${p.title}</h3>
+                <p style="font-size: 0.8rem; color: #2dd4bf;">${p.category}</p>
+                <p>${p.content.substring(0, 100)}...</p>
+                <p style="font-size: 0.7rem; color: #9ca3af; margin-top: 0.5rem;">👨‍⚕️ ${p.author} | 📅 ${p.date} | ⏱️ ${p.readTime}</p>
+                <button class="btn btn-outline" style="margin-top: 0.5rem; width: 100%;">Read More →</button>
+            </div>
+        `).join('');
+    }
+
+
+    
+    window.showBlogPost = function(id) {
+        const post = blogPosts.find(p => p.id === id);
+        if (post) {
+            alert(`📖 ${post.title}\n\n${post.content}\n\n- ${post.author}, ${post.date}`);
+        }
+    };
+    
+    document.getElementById('blogSearch')?.addEventListener('input', (e) => renderBlogPosts(e.target.value));
+    document.getElementById('subscribeNewsBtn')?.addEventListener('click', () => {
+        const email = document.getElementById('newsletterEmail').value;
+        if (email) {
+            showMessage('newsletterMsg', `✅ Subscribed! Health tips will be sent to ${email}`, 'success');
+            document.getElementById('newsletterEmail').value = '';
+        } else {
+            showMessage('newsletterMsg', '❌ Please enter a valid email address.', 'error');
+        }
+    });
+    
+    renderBlogPosts();
+}
+        window.scrollTo({ top: 0 });
+    }
+
+    window.submitRate = function() {
+        const name = document.getElementById('rateName')?.value;
+        const stars = parseInt(document.getElementById('selectedStar')?.value || 0);
+        const comment = document.getElementById('rateComment')?.value;
+        if (!name || stars === 0 || !comment) { showMessage('rateMsg', 'Please fill all fields and select a rating.', 'error'); return; }
+        addRating({ id: Date.now(), name, stars, comment });
+        showMessage('rateMsg', '✅ Thank you for your review!', 'success');
+        setTimeout(() => showPage('ratings'), 1500);
+    };
+
+    window.deleteAppointment = deleteAppointment;
+    window.deleteRating = deleteRating;
+    window.showTab = showTab;
+    window.bookDoctor = bookDoctor;
+    window.closeModal = closeModal;
+
+    // Patient Portal Helper Functions
+window.showPatientTab = function(tabId) {
+    document.querySelectorAll('#loginTab, #registerTab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.getElementById(tabId).classList.add('active');
+    event.target.classList.add('active');
+};
+
+window.logoutPatient = function() {
+    localStorage.removeItem('groupd_currentUser');
+    showPage('patient');
+};
+
+window.requestRefill = function(medicine) {
+    alert(`✅ Refill request submitted for ${medicine}. You will be contacted within 24 hours.`);
+};
+
+window.payBill = function(billId) {
+    alert(`💰 Payment processing for Bill #${billId}. You will be redirected to payment gateway.`);
+};
+
+    showPage('home');
+</script>
+</body>
+</html>
