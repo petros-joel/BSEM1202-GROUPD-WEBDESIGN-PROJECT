@@ -1,5 +1,5 @@
 ><!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -2070,7 +2070,7 @@ else if (page === 'blog') {
         const comment = document.getElementById('rateComment')?.value;
         if (!name || stars === 0 || !comment) { showMessage('rateMsg', 'Please fill all fields and select a rating.', 'error'); return; }
         addRating({ id: Date.now(), name, stars, comment });
-        showMessage('rateMsg', '✅ Thank you for your review!', 'success');
+        showMessage('rateMsg', '✅ Thank you for This review!', 'success');
         setTimeout(() => showPage('ratings'), 1500);
     };
 
