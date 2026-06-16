@@ -106,10 +106,10 @@
         }
 
         main {
-    margin-top: 80px;
-    min-height: calc(100vh - 80px);
-    padding-top: 20px;  /
-}
+           margin-top: 80px;
+           min-height: calc(100vh - 80px);
+           padding-top: 20px;  
+        }
 
         .hero {
             background: radial-gradient(circle at 30% 40%, #1e293b, #0a0c10);
@@ -120,6 +120,29 @@
             flex-wrap: wrap;
             gap: 3rem;
             align-items: center;
+            background-image: url('images/images.png');  
+            background-size: cover;                                     
+            background-position: center;                                
+            position: relative;                                         
+        
+        }
+
+
+       .hero::before {
+           content: '';
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background: rgba(10, 12, 16, 0.7);
+           border-radius: 2rem;
+           z-index: 0;
+        }
+
+        .hero-content, .hero-image {
+            position: relative;
+            z-index: 1;
         }
 
         .hero-content {
@@ -1479,11 +1502,24 @@ else if (page === 'patient') {
     let currentUser = JSON.parse(localStorage.getItem('groupd_currentUser')) || null;
     let users = JSON.parse(localStorage.getItem('groupd_users')) || [];
     
+    // Check if user is an Admin (Doctor or Leader)
+    const isAdmin = currentUser && (
+        currentUser.role === 'admin' ||
+        medicalDoctors.some(d => d.name === currentUser.name) ||
+        leaders.some(l => l.name === currentUser.name) ||
+        financeTeam.some(f => f.name === currentUser.name)
+    );
+    
+    // Get user's appointments from the MAIN appointments array using email
+    const userAppointments = appointments.filter(a => a.email === currentUser?.email);
+    const allAppointments = appointments;
+    
     content.innerHTML = `
         <div class="container">
-            <h1 class="section-title">Patient <span>Portal</span></h1>
+            <h1 class="section-title">${isAdmin ? 'Admin' : 'Patient'} <span>Portal</span></h1>
             
             ${!currentUser ? `
+            <!-- LOGIN / REGISTER -->
             <div class="tabs">
                 <button class="tab-btn active" onclick="showPatientTab('loginTab')">🔐 Login</button>
                 <button class="tab-btn" onclick="showPatientTab('registerTab')">📝 Register</button>
@@ -1492,14 +1528,24 @@ else if (page === 'patient') {
             <div id="loginTab" class="tab-content active">
                 <div class="form-container">
                     <h3>Login to Your Account</h3>
+                    <p style="color: #9ca3af; margin-bottom: 1rem;">Staff Login: Use your email or select your name from the dropdown.</p>
                     <form id="loginForm">
+                        <div class="form-group">
+                            <label>Select Staff (Doctors/Leaders)</label>
+                            <select id="staffSelect" onchange="document.getElementById('loginEmail').value = this.value;">
+                                <option value="">-- Select Staff --</option>
+                                ${leaders.map(l => `<option value="${l.name.toLowerCase().replace(/ /g, '.')}@groupdhealth.sl">${l.name} (${l.specialty})</option>`).join('')}
+                                ${medicalDoctors.map(d => `<option value="${d.name.toLowerCase().replace(/ /g, '.')}@groupdhealth.sl">${d.name} (${d.specialty})</option>`).join('')}
+                                ${financeTeam.map(f => `<option value="${f.name.toLowerCase().replace(/ /g, '.')}@groupdhealth.sl">${f.name} (${f.specialty})</option>`).join('')}
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label>Email Address</label>
                             <input type="email" id="loginEmail" required>
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" id="loginPassword" required>
+                            <input type="password" id="loginPassword" placeholder="Default: staff123" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Login</button>
                     </form>
@@ -1509,105 +1555,269 @@ else if (page === 'patient') {
             
             <div id="registerTab" class="tab-content">
                 <div class="form-container">
-                    <h3>Create New Account</h3>
+                    <h3>Create New Patient Account</h3>
+                    <p style="color: #9ca3af; margin-bottom: 1rem;">For patients only. Staff accounts are created by admins.</p>
                     <form id="registerForm">
-                        <div class="form-group">
-                            <label>Full Name</label>
-                            <input type="text" id="regName" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Email Address</label>
-                            <input type="email" id="regEmail" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Phone Number</label>
-                            <input type="tel" id="regPhone" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" id="regPassword" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Confirm Password</label>
-                            <input type="password" id="regConfirmPassword" required>
-                        </div>
+                        <div class="form-group"><label>Full Name</label><input type="text" id="regName" required></div>
+                        <div class="form-group"><label>Email Address</label><input type="email" id="regEmail" required></div>
+                        <div class="form-group"><label>Phone Number</label><input type="tel" id="regPhone" required placeholder="077XXXXXX"></div>
+                        <div class="form-group"><label>Password</label><input type="password" id="regPassword" required></div>
+                        <div class="form-group"><label>Confirm Password</label><input type="password" id="regConfirmPassword" required></div>
                         <button type="submit" class="btn btn-primary">Register</button>
                     </form>
                     <div id="registerMsg"></div>
                 </div>
             </div>
             ` : `
-            <div style="background: linear-gradient(135deg, #1e293b, #0f172a); border-radius: 1rem; padding: 2rem; margin-bottom: 2rem;">
-                <h2>Welcome back, <span style="color: #2dd4bf;">${currentUser.name}</span>!</h2>
-                <p>${currentUser.email} | 📞 ${currentUser.phone}</p>
-                <button class="btn btn-outline" style="margin-top: 1rem;" onclick="logoutPatient()">Logout</button>
+            <!-- LOGGED IN VIEW -->
+            <div style="background: linear-gradient(135deg, ${isAdmin ? '#1e3a5f' : '#1e293b'}, #0f172a); border-radius: 1rem; padding: 2rem; margin-bottom: 2rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                    <div>
+                        <h2>Welcome, <span style="color: #2dd4bf;">${currentUser.name}</span>!</h2>
+                        <p>📧 ${currentUser.email} | 📞 ${currentUser.phone}</p>
+                        <p>👤 ${isAdmin ? '👨‍⚕️ Staff / Admin' : 'Patient'}</p>
+                        ${isAdmin ? `<p style="color: #2dd4bf;">🔑 Full Admin Access</p>` : ''}
+                        <p style="color: #9ca3af; font-size: 0.8rem;">📅 You have ${userAppointments.length} appointment(s)</p>
+                    </div>
+                    <button class="btn btn-outline" onclick="logoutPatient()">Logout</button>
+                </div>
             </div>
             
+            ${isAdmin ? `
+            <!-- ============================================ -->
+            <!-- ADMIN VIEW (Doctors & Leaders)                -->
+            <!-- ============================================ -->
+            <div class="dashboard-stats">
+                <div class="stat-card"><div class="number">${users.length}</div><div>Total Users</div></div>
+                <div class="stat-card"><div class="number">${allAppointments.length}</div><div>Total Appointments</div></div>
+                <div class="stat-card"><div class="number">${allAppointments.filter(a => new Date(a.date) >= new Date()).length}</div><div>Upcoming</div></div>
+                <div class="stat-card"><div class="number">${allAppointments.filter(a => new Date(a.date) < new Date()).length}</div><div>Completed</div></div>
+                <div class="stat-card"><div class="number">${medicalDoctors.length}</div><div>Doctors</div></div>
+                <div class="stat-card"><div class="number">${locations.length}</div><div>Locations</div></div>
+            </div>
+            
+            <!-- ADMIN: ALL USERS -->
+            <h2 class="section-title">All <span>Users</span></h2>
+            <div class="form-container">
+                ${users.length === 0 ? '<p>No users registered yet.</p>' : `
+                <div style="overflow-x: auto;">
+                    <table style="width:100%; border-collapse: collapse; color: #eef2ff;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid #1f2937;">
+                                <th style="padding: 0.5rem; text-align: left;">Name</th>
+                                <th style="padding: 0.5rem; text-align: left;">Email</th>
+                                <th style="padding: 0.5rem; text-align: left;">Phone</th>
+                                <th style="padding: 0.5rem; text-align: left;">Appointments</th>
+                                <th style="padding: 0.5rem; text-align: left;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${users.map(u => `
+                                <tr style="border-bottom: 1px solid #1a1f2a;">
+                                    <td style="padding: 0.5rem;">${u.name}</td>
+                                    <td style="padding: 0.5rem;">${u.email}</td>
+                                    <td style="padding: 0.5rem;">${u.phone}</td>
+                                    <td style="padding: 0.5rem;">${allAppointments.filter(a => a.email === u.email).length}</td>
+                                    <td style="padding: 0.5rem;">
+                                        <button class="btn btn-danger" style="padding: 0.1rem 0.5rem; font-size: 0.7rem;" onclick="deleteUser('${u.email}')">Delete</button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>`}
+            </div>
+            
+            <!-- ADMIN: ALL APPOINTMENTS -->
+            <h2 class="section-title">All <span>Appointments</span></h2>
+            <div class="form-container">
+                ${allAppointments.length === 0 ? '<p>No appointments yet.</p>' : allAppointments.map(a => `
+                    <div class="appointment-item" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                        <div>
+                            <strong>${a.name}</strong><br>
+                            👨‍⚕️ ${a.doctor}<br>
+                            📅 ${a.date} | ${a.time}<br>
+                            📍 ${a.location}<br>
+                            📝 "${a.symptoms ? a.symptoms.substring(0, 50) : 'No symptoms'}"
+                        </div>
+                        <button class="btn btn-danger" style="padding: 0.25rem 1rem;" onclick="deleteAppointment(${a.id})">Delete</button>
+                    </div>
+                `).join('')}
+            </div>
+            
+            <!-- ADMIN: STAFF LIST -->
+            <h2 class="section-title">Medical <span>Staff</span></h2>
+            <div class="cards-grid">
+                ${leaders.map(l => `
+                    <div class="doctor-card">
+                        <div class="doctor-image"><img src="${l.image}" onerror="this.parentElement.innerHTML='<div class=\\'image-placeholder\\'><i class=\\'fas fa-user-tie\\'></i></div>'"></div>
+                        <div class="doctor-info">
+                            <h4>${l.name}</h4>
+                            <p>${l.specialty}</p>
+                            <p style="color: #2dd4bf; font-size: 0.7rem;">👑 Leadership</p>
+                        </div>
+                    </div>
+                `).join('')}
+                ${medicalDoctors.map(d => `
+                    <div class="doctor-card">
+                        <div class="doctor-image"><img src="${d.image}" onerror="this.parentElement.innerHTML='<div class=\\'image-placeholder\\'><i class=\\'fas fa-user-md\\'></i></div>'"></div>
+                        <div class="doctor-info">
+                            <h4>${d.name}</h4>
+                            <p>${d.specialty}</p>
+                            <p style="color: #9ca3af; font-size: 0.7rem;">${d.expertise ? d.expertise.join(', ') : ''}</p>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+            ` : `
+            <!-- ============================================ -->
+            <!-- PATIENT VIEW                                  -->
+            <!-- ============================================ -->
+            <!-- STATS CARDS -->
+            <div class="dashboard-stats">
+                <div class="stat-card"><div class="number">${userAppointments.length}</div><div>Total Appointments</div></div>
+                <div class="stat-card"><div class="number">${userAppointments.filter(a => new Date(a.date) >= new Date()).length}</div><div>Upcoming</div></div>
+                <div class="stat-card"><div class="number">${currentUser.prescriptions ? currentUser.prescriptions.length : 0}</div><div>Prescriptions</div></div>
+                <div class="stat-card"><div class="number">${currentUser.bills ? currentUser.bills.filter(b => !b.paid).length : 0}</div><div>Pending Bills</div></div>
+            </div>
+            
+            <!-- PATIENT: APPOINTMENTS -->
             <h2 class="section-title">Your <span>Appointments</span></h2>
             <div class="form-container">
-                <div id="patientAppointments">
-                    ${appointments.filter(a => a.email === currentUser.email).length === 0 ? '<p>No upcoming appointments.</p>' : appointments.filter(a => a.email === currentUser.email).map(a => `
-                        <div class="appointment-item">
+                ${userAppointments.length === 0 ? `
+                    <div style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-calendar-plus" style="font-size: 3rem; color: #2dd4bf;"></i>
+                        <p>No appointments yet.</p>
+                        <p style="color: #9ca3af; font-size: 0.9rem;">Book an appointment using the same email you used to register.</p>
+                        <button class="btn btn-primary" onclick="showPage('appointments')" style="margin-top: 1rem;">📅 Book Now</button>
+                    </div>
+                ` : userAppointments.map(a => `
+                    <div class="appointment-item" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                        <div>
                             <strong>👨‍⚕️ ${a.doctor}</strong><br>
                             📅 ${a.date} | ${a.time || 'Time TBD'}<br>
                             📍 ${a.location}<br>
-                            📝 "${a.symptoms.substring(0, 50)}"
+                            📝 "${a.symptoms ? a.symptoms.substring(0, 50) : 'No symptoms'}"
                         </div>
-                    `).join('')}
-                </div>
+                        <button class="btn btn-danger" style="padding: 0.25rem 1rem;" onclick="cancelAppointment(${a.id})">Cancel</button>
+                    </div>
+                `).join('')}
             </div>
             
+            <!-- PATIENT: QUICK BOOK -->
+            <div style="text-align: center; margin: 1rem 0;">
+                <button class="btn btn-primary" onclick="showPage('appointments')">+ Book New Appointment</button>
+            </div>
+            
+            <!-- PATIENT: MEDICAL HISTORY -->
             <h2 class="section-title">Medical <span>History</span></h2>
             <div class="form-container">
-                <div id="medicalHistory">
-                    ${currentUser.medicalHistory && currentUser.medicalHistory.length > 0 ? currentUser.medicalHistory.map(h => `
-                        <div class="appointment-item">
-                            <strong>📅 ${h.date}</strong><br>
-                            👨‍⚕️ Dr. ${h.doctor}<br>
-                            🩺 Diagnosis: ${h.diagnosis}<br>
-                            💊 Prescription: ${h.prescription}
-                        </div>
-                    `).join('') : '<p>No medical history available.</p>'}
-                </div>
+                ${currentUser.medicalHistory && currentUser.medicalHistory.length > 0 ? currentUser.medicalHistory.map(h => `
+                    <div class="appointment-item">
+                        <strong>📅 ${h.date}</strong><br>
+                        👨‍⚕️ ${h.doctor}<br>
+                        🩺 Diagnosis: ${h.diagnosis}<br>
+                        💊 Prescription: ${h.prescription}
+                    </div>
+                `).join('') : `
+                    <div style="text-align: center; padding: 1rem;">
+                        <i class="fas fa-notes-medical" style="font-size: 2rem; color: #2dd4bf;"></i>
+                        <p>No medical history available.</p>
+                        <small style="color: #9ca3af;">After your first doctor visit, your records will appear here.</small>
+                    </div>
+                `}
             </div>
             
+            <!-- PATIENT: PRESCRIPTIONS -->
             <h2 class="section-title">Active <span>Prescriptions</span></h2>
             <div class="form-container">
-                <div id="activePrescriptions">
-                    ${currentUser.prescriptions && currentUser.prescriptions.length > 0 ? currentUser.prescriptions.map(p => `
-                        <div class="appointment-item">
+                ${currentUser.prescriptions && currentUser.prescriptions.length > 0 ? currentUser.prescriptions.map(p => `
+                    <div class="appointment-item" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                        <div>
                             <strong>💊 ${p.medicine}</strong><br>
-                            👨‍⚕️ Prescribed by: Dr. ${p.doctor}<br>
-                            📅 Date: ${p.date}<br>
+                            👨‍⚕️ Dr. ${p.doctor}<br>
+                            📅 ${p.date}<br>
                             📝 Dosage: ${p.dosage}
-                            <button class="btn btn-primary" style="margin-top: 0.5rem; padding: 0.25rem 1rem;" onclick="requestRefill('${p.medicine}')">Request Refill</button>
                         </div>
-                    `).join('') : '<p>No active prescriptions.</p>'}
-                </div>
+                        <button class="btn btn-primary" style="padding: 0.25rem 1rem;" onclick="requestRefill('${p.medicine}')">Request Refill</button>
+                    </div>
+                `).join('') : `
+                    <div style="text-align: center; padding: 1rem;">
+                        <i class="fas fa-prescription" style="font-size: 2rem; color: #2dd4bf;"></i>
+                        <p>No active prescriptions.</p>
+                    </div>
+                `}
             </div>
             
+            <!-- PATIENT: BILLING -->
             <h2 class="section-title">Billing <span>History</span></h2>
             <div class="form-container">
-                <div id="billingHistory">
-                    ${currentUser.bills && currentUser.bills.length > 0 ? currentUser.bills.map(b => `
-                        <div class="appointment-item">
+                ${currentUser.bills && currentUser.bills.length > 0 ? currentUser.bills.map(b => `
+                    <div class="appointment-item" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                        <div>
                             <strong>💰 Bill #${b.id}</strong><br>
-                            Amount: Le ${b.amount}<br>
+                            Amount: Le ${b.amount.toLocaleString()}<br>
                             Status: ${b.paid ? '<span style="color:#10b981;">Paid ✅</span>' : '<span style="color:#ef4444;">Pending ❌</span>'}<br>
                             Date: ${b.date}
-                            ${!b.paid ? `<button class="btn btn-primary" style="margin-top: 0.5rem; padding: 0.25rem 1rem;" onclick="payBill(${b.id})">Pay Now</button>` : ''}
                         </div>
-                    `).join('') : '<p>No billing history.</p>'}
+                        ${!b.paid ? `<button class="btn btn-primary" style="padding: 0.25rem 1rem;" onclick="payBill(${b.id})">Pay Now</button>` : ''}
+                    </div>
+                `).join('') : `
+                    <div style="text-align: center; padding: 1rem;">
+                        <i class="fas fa-receipt" style="font-size: 2rem; color: #2dd4bf;"></i>
+                        <p>No billing history.</p>
+                    </div>
+                `}
+            </div>
+            
+            <!-- PATIENT: QUICK ACTIONS -->
+            <div class="form-container" style="margin-top: 2rem;">
+                <h3>Quick Actions</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <button class="btn btn-primary" onclick="showPage('appointments')">📅 Book Appointment</button>
+                    <button class="btn btn-primary" onclick="showPage('pharmacy')">💊 Order Medicine</button>
+                    <button class="btn btn-outline" onclick="showPage('emergency')">🚑 Emergency</button>
+                    <button class="btn btn-outline" onclick="showPage('doctors')">👨‍⚕️ Find Doctor</button>
                 </div>
             </div>
+            `}
             `}
         </div>
     `;
     
+    // LOGIN FORM
     document.getElementById('loginForm')?.addEventListener('submit', (e) => {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value;
         const password = document.getElementById('loginPassword').value;
+        
+        // Check if user is a doctor or leader (auto-login for staff)
+        const matchingDoctor = medicalDoctors.find(d => d.name.toLowerCase().replace(/ /g, '.') + '@groupdhealth.sl' === email);
+        const matchingLeader = leaders.find(l => l.name.toLowerCase().replace(/ /g, '.') + '@groupdhealth.sl' === email);
+        const matchingFinance = financeTeam.find(f => f.name.toLowerCase().replace(/ /g, '.') + '@groupdhealth.sl' === email);
+        
+        if (matchingDoctor || matchingLeader || matchingFinance) {
+            const staff = matchingDoctor || matchingLeader || matchingFinance;
+            if (password === 'staff123') {
+                const staffUser = { 
+                    id: Date.now(), 
+                    name: staff.name, 
+                    email: email, 
+                    phone: staff.location || '0000000000', 
+                    password: 'staff123', 
+                    role: 'admin' 
+                };
+                localStorage.setItem('groupd_currentUser', JSON.stringify(staffUser));
+                showMessage('loginMsg', `✅ Welcome ${staff.name}! You are logged in as Staff/Admin.`, 'success');
+                setTimeout(() => showPage('patient'), 1500);
+                return;
+            } else {
+                showMessage('loginMsg', '❌ Incorrect password for staff account. Default is "staff123".', 'error');
+                return;
+            }
+        }
+        
+        // Regular user login
         const user = users.find(u => u.email === email && u.password === password);
         if (user) {
             localStorage.setItem('groupd_currentUser', JSON.stringify(user));
@@ -1618,6 +1828,7 @@ else if (page === 'patient') {
         }
     });
     
+    // REGISTER FORM
     document.getElementById('registerForm')?.addEventListener('submit', (e) => {
         e.preventDefault();
         const name = document.getElementById('regName').value;
@@ -1636,7 +1847,7 @@ else if (page === 'patient') {
             return;
         }
         
-        const newUser = { id: Date.now(), name, email, phone, password, medicalHistory: [], prescriptions: [], bills: [] };
+        const newUser = { id: Date.now(), name, email, phone, password, medicalHistory: [], prescriptions: [], bills: [], appointments: [] };
         users.push(newUser);
         localStorage.setItem('groupd_users', JSON.stringify(users));
         localStorage.setItem('groupd_currentUser', JSON.stringify(newUser));
