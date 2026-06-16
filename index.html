@@ -1208,19 +1208,22 @@
                                 <option value="Night Shift (6PM-10PM)">🌙 Night Shift (6PM-10PM)</option>
                             </select>
                         </div>
-                        <div class="form-group"><label>Describe Your Symptoms *</label><textarea id="aptSymptoms" rows="3" placeholder="e.g., I have chest pain, I need a surgery, my child has fever..."></textarea></div>
+                        <div class="form-group"><label>Describe Your Symptoms *</label><textarea id="aptSymptoms" rows="3" placeholder="e.g., I have chest pain..."></textarea></div>
                         <button type="submit" class="btn btn-primary">✅ Book Appointment</button>
                     </form>
                     <div id="aptMsg"></div>
                 </div>
             </div>
             
-            <!-- FINANCE APPOINTMENT TAB -->
+            <!-- FINANCE / PAYMENT TAB -->
             <div id="financeTab" class="tab-content">
                 <div class="form-container">
+                    <h3>💰 Finance & Payment</h3>
+                    <p style="color: #9ca3af; margin-bottom: 1rem;">For all financial inquiries including bill payments, insurance claims, and payment plans. Managed by <strong style="color: #2dd4bf;">Shebora Kamara</strong> (Finance Manager).</p>
+                    
                     <form id="financeForm">
                         <div class="form-group"><label>Full Name *</label><input type="text" id="finName" required></div>
-                        <div class="form-group"><label>Phone Number *</label><input type="tel" id="finPhone" required></div>
+                        <div class="form-group"><label>Phone Number *</label><input type="tel" id="finPhone" required placeholder="077XXXXXX"></div>
                         <div class="form-group"><label>Email *</label><input type="email" id="finEmail" required></div>
                         <div class="form-group">
                             <label>Select Location *</label>
@@ -1230,10 +1233,15 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Select Finance Officer *</label>
-                            <select id="finDoctor" required>
-                                <option value="">-- Select Finance Officer --</option>
-                                ${financeTeam.map(d => `<option value="${d.name}">${d.name} - ${d.specialty}</option>`).join('')}
+                            <label>Inquiry Type *</label>
+                            <select id="finInquiryType" required>
+                                <option value="">-- Select Type --</option>
+                                <option value="Bill Payment">💰 Bill Payment</option>
+                                <option value="Insurance Claim">📄 Insurance Claim</option>
+                                <option value="Payment Plan">📋 Payment Plan</option>
+                                <option value="Invoice Inquiry">📊 Invoice Inquiry</option>
+                                <option value="Refund Request">🔄 Refund Request</option>
+                                <option value="Other">❓ Other</option>
                             </select>
                         </div>
                         <div class="form-group"><label>Select Date *</label><input type="date" id="finDate" min="${new Date().toISOString().split('T')[0]}" required></div>
@@ -1241,13 +1249,13 @@
                             <label>Select Time Slot *</label>
                             <select id="finTime" required>
                                 <option value="">-- Select Time --</option>
-                                <option value="Morning Shift (8AM-12PM)">🌅 Morning Shift (8AM-12PM)</option>
-                                <option value="Afternoon Shift (1PM-5PM)">☀️ Afternoon Shift (1PM-5PM)</option>
-                                <option value="Night Shift (6PM-10PM)">🌙 Night Shift (6PM-10PM)</option>
+                                <option value="Morning Shift (8AM-12PM)">🌅 Morning (8AM-12PM)</option>
+                                <option value="Afternoon Shift (1PM-5PM)">☀️ Afternoon (1PM-5PM)</option>
+                                <option value="Night Shift (6PM-10PM)">🌙 Night (6PM-10PM)</option>
                             </select>
                         </div>
-                        <div class="form-group"><label>Payment/Billing Inquiry *</label><textarea id="finSymptoms" rows="3" placeholder="e.g., I need to pay my hospital bill, insurance claim..."></textarea></div>
-                        <button type="submit" class="btn btn-primary">📅 Book Finance Meeting</button>
+                        <div class="form-group"><label>Financial Inquiry Details *</label><textarea id="finSymptoms" rows="3" placeholder="Please describe your billing, insurance, or payment issue."></textarea></div>
+                        <button type="submit" class="btn btn-primary">📅 Submit Inquiry</button>
                     </form>
                     <div id="finMsg"></div>
                 </div>
@@ -1256,35 +1264,15 @@
             <!-- APPOINTMENTS LIST -->
             <div class="form-container">
                 <h3>📋 Your Appointments</h3>
-                <div id="appointmentsList">${appointments.length === 0 ? '<p>No appointments yet. Book one above!</p>' : appointments.map(a => `<div class="appointment-item"><strong>${a.name}</strong><br>👨‍⚕️ ${a.doctor}<br>📅 ${a.date} | ${a.time}<br>📍 ${a.location}<br>📝 "${a.symptoms.substring(0, 50)}"</div>`).join('')}</div>
+                <div id="appointmentsList">${appointments.length === 0 ? '<p>No appointments yet. Book one above!</p>' : appointments.map(a => `<div class="appointment-item"><strong>${a.name}</strong><br>👨‍⚕️ ${a.doctor}<br>📅 ${a.date} | ${a.time}<br>📍 ${a.location}<br>📝 "${a.symptoms ? a.symptoms.substring(0, 50) : 'No details'}"</div>`).join('')}</div>
             </div>
         </div>
     `;
     
     // ============================================
-    // SPECIALIZATION MATCHING FUNCTION
-    // ============================================
-    function findCorrectSpecialist(symptoms, selectedDoctorName) {
-        const selectedDoc = medicalDoctors.find(d => d.name === selectedDoctorName);
-        if (!selectedDoc) return { match: false, message: "Doctor not found.", suggested: null };
-        
-        const matchedExpertise = selectedDoc.expertise.some(exp => symptoms.toLowerCase().includes(exp.toLowerCase()));
-        
-        if (!matchedExpertise) {
-            const suggestedDoctor = medicalDoctors.find(d => d.expertise.some(exp => symptoms.toLowerCase().includes(exp.toLowerCase()))) || medicalDoctors[0];
-            return { 
-                match: false, 
-                message: `❌ Dr. ${selectedDoc.name} specializes in ${selectedDoc.expertise.join(', ')}. Based on your symptoms "${symptoms}", we recommend booking <strong>${suggestedDoctor.name}</strong> (${suggestedDoctor.specialty}).`,
-                suggested: suggestedDoctor
-            };
-        }
-        return { match: true, message: "✅ Doctor matches your symptoms!", suggested: null };
-    }
-    
-    // ============================================
     // MEDICAL APPOINTMENT FORM SUBMIT
     // ============================================
-    document.getElementById('aptForm')?.addEventListener('submit', (e) => {
+    document.getElementById('aptForm')?.addEventListener('submit', function(e) {
         e.preventDefault();
         
         const name = document.getElementById('aptName').value;
@@ -1301,88 +1289,100 @@
             return;
         }
         
-        // STEP 1: SPECIALIZATION MATCHING
-        const specializationCheck = findCorrectSpecialist(symptoms, doctor);
+        // Check if doctor matches symptoms (Smart Matching)
+        const specializationCheck = findCorrectDoctor(symptoms, doctor);
         if (!specializationCheck.match) {
             showMessage('aptMsg', specializationCheck.message, 'error');
             if (specializationCheck.suggested) {
-                const doctorSelect = document.getElementById('aptDoctor');
-                if (doctorSelect) doctorSelect.value = specializationCheck.suggested.name;
+                document.getElementById('aptDoctor').value = specializationCheck.suggested.name;
             }
             return;
         }
         
-        // STEP 2: CHECK FOR FINANCE VS MEDICAL MISMATCH
-        const financeKeywords = ["payment", "bill", "money", "insurance", "cost", "fee", "salary", "invoice"];
-        const isFinanceQuery = financeKeywords.some(k => symptoms.toLowerCase().includes(k));
-        if (isFinanceQuery) {
-            showMessage('aptMsg', `❌ Your issue appears to be financial ("${symptoms}"). Please use the "Finance / Payment" tab to book with Shebora Kamara.`, 'error');
-            return;
-        }
-        
-        // STEP 3: CHECK DATE AND TIME CONFLICT
-        const existingBooking = appointments.find(a => a.doctor === doctor && a.date === date && a.time === time);
+        // Check if doctor is already booked
+        const existingBooking = appointments.find(function(a) { return a.doctor === doctor && a.date === date && a.time === time; });
         if (existingBooking) {
-            showMessage('aptMsg', `❌ Dr. ${doctor} is already booked for ${date} during the ${time}. Please choose a different date or time slot.`, 'error');
+            showMessage('aptMsg', '❌ ' + doctor + ' is already booked for ' + date + ' during the ' + time + '. Please choose a different date or time.', 'error');
             return;
         }
         
-        // STEP 4: ADD APPOINTMENT
-        const newAppt = { id: Date.now(), name, phone, email, location, doctor, date, time, symptoms, type: 'medical' };
+        var newAppt = { id: Date.now(), name: name, phone: phone, email: email, location: location, doctor: doctor, date: date, time: time, symptoms: symptoms, type: 'medical' };
         appointments.push(newAppt);
         saveAppointments();
-        
-        showMessage('aptMsg', `✅ Thank you ${name}! Your appointment with Dr. ${doctor} on ${date} at ${time} at ${location} has been booked. See you soon!`, 'success');
+        showMessage('aptMsg', '✅ Thank you ' + name + '! Your appointment with ' + doctor + ' on ' + date + ' at ' + time + ' has been booked.', 'success');
         document.getElementById('aptForm').reset();
-        setTimeout(() => showPage('appointments'), 2000);
+        setTimeout(function() { showPage('appointments'); }, 2000);
     });
     
     // ============================================
     // FINANCE APPOINTMENT FORM SUBMIT
     // ============================================
-    document.getElementById('financeForm')?.addEventListener('submit', (e) => {
+    document.getElementById('financeForm')?.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        const name = document.getElementById('finName').value;
-        const phone = document.getElementById('finPhone').value;
-        const email = document.getElementById('finEmail').value;
-        const location = document.getElementById('finLocation').value;
-        const doctor = document.getElementById('finDoctor').value;
-        const date = document.getElementById('finDate').value;
-        const time = document.getElementById('finTime').value;
-        const symptoms = document.getElementById('finSymptoms').value;
+        var name = document.getElementById('finName').value;
+        var phone = document.getElementById('finPhone').value;
+        var email = document.getElementById('finEmail').value;
+        var location = document.getElementById('finLocation').value;
+        var inquiryType = document.getElementById('finInquiryType').value;
+        var date = document.getElementById('finDate').value;
+        var time = document.getElementById('finTime').value;
+        var symptoms = document.getElementById('finSymptoms').value;
         
-        if (!name || !phone || !email || !location || !doctor || !date || !time || !symptoms) {
-            showMessage('finMsg', '❌ Please fill in all fields.', 'error');
+        if (!name || !phone || !email || !location || !inquiryType || !date || !time || !symptoms) {
+            showMessage('finMsg', '❌ Please fill in all required fields.', 'error');
             return;
         }
         
-        // Check if this is actually a medical issue
-        const medicalKeywords = ["pain", "fever", "cough", "headache", "surgery", "heart", "baby", "child", "broken", "bleeding", "wound"];
-        const isMedicalQuery = medicalKeywords.some(k => symptoms.toLowerCase().includes(k));
+        // Check if this is a medical issue
+        var medicalKeywords = ["pain", "fever", "cough", "headache", "surgery", "heart", "baby", "child", "broken", "bleeding", "wound", "chest", "stomach", "back"];
+        var isMedicalQuery = false;
+        for (var i = 0; i < medicalKeywords.length; i++) {
+            if (symptoms.toLowerCase().includes(medicalKeywords[i])) {
+                isMedicalQuery = true;
+                break;
+            }
+        }
+        
         if (isMedicalQuery) {
-            showMessage('finMsg', `❌ Your issue appears to be medical ("${symptoms}"). Please use the "Medical Appointment" tab to book with a doctor.`, 'error');
+            showMessage('finMsg', '❌ This appears to be a medical issue. Please use the "Medical Appointment" tab to book with a doctor.', 'error');
             return;
         }
         
-        // Check for date/time conflict
-        const existingBooking = appointments.find(a => a.doctor === doctor && a.date === date && a.time === time);
+        // Check if finance officer is already booked
+        var existingBooking = null;
+        for (var j = 0; j < appointments.length; j++) {
+            if (appointments[j].doctor === "Shebora Kamara" && appointments[j].date === date && appointments[j].time === time) {
+                existingBooking = appointments[j];
+                break;
+            }
+        }
+        
         if (existingBooking) {
-            showMessage('finMsg', `❌ ${doctor} is already booked for ${date} during the ${time}. Please choose a different date or time.`, 'error');
+            showMessage('finMsg', '❌ Shebora Kamara is already booked for ' + date + ' at ' + time + '. Please choose another date or time.', 'error');
             return;
         }
         
-        const newAppt = { id: Date.now(), name, phone, email, location, doctor, date, time, symptoms, type: 'finance' };
+        var newAppt = { 
+            id: Date.now(), 
+            name: name, 
+            phone: phone, 
+            email: email, 
+            location: location, 
+            doctor: "Shebora Kamara (Finance Manager)", 
+            date: date, 
+            time: time, 
+            symptoms: '[' + inquiryType + '] ' + symptoms, 
+            type: 'finance' 
+        };
+        
         appointments.push(newAppt);
         saveAppointments();
-        
-        showMessage('finMsg', `✅ Thank you ${name}! Your meeting with ${doctor} on ${date} at ${time} at ${location} has been booked.`, 'success');
+        showMessage('finMsg', '✅ Thank you ' + name + '! Your financial inquiry has been submitted. You will be contacted by Shebora Kamara on ' + date + ' at ' + time + '.', 'success');
         document.getElementById('financeForm').reset();
-        setTimeout(() => showPage('appointments'), 2000);
+        setTimeout(function() { showPage('appointments'); }, 2000);
     });
 }
-        
-
         
         else if (page === 'dashboard') {
             const today = new Date().toISOString().split('T')[0];
@@ -2080,6 +2080,18 @@ else if (page === 'blog') {
     window.bookDoctor = bookDoctor;
     window.closeModal = closeModal;
 
+    function showAppointmentTab(tabId) {
+    var tabs = document.querySelectorAll('#medicalTab, #financeTab');
+    for (var i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove('active');
+    }
+    var btns = document.querySelectorAll('.tab-btn');
+    for (var j = 0; j < btns.length; j++) {
+        btns[j].classList.remove('active');
+    }
+    document.getElementById(tabId).classList.add('active');
+    if (event && event.target) event.target.classList.add('active');
+}
     // Patient Portal Helper Functions
 window.showPatientTab = function(tabId) {
     document.querySelectorAll('#loginTab, #registerTab').forEach(tab => {
